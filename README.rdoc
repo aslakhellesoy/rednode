@@ -1,6 +1,13 @@
-= noderb
+= Node.rb
 
-Description goes here.
+Node.rb is a pure ruby implementation of the native C++ parts of Node.js. 
+Node.rb uses http://github.com/cowboyd/therubyracer - an embedded V8 engine
+that runs in the same process as Ruby.
+
+== Why Node.rb?
+
+* You can mix Ruby code and Javascript code in your node app.
+* You can launch your (possibly pure js) node app from Ruby, allowing you to use e.g. Cucumber to test it.
 
 == Note on Patches/Pull Requests
  
