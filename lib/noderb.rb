@@ -1,3 +1,9 @@
+begin
+  require 'v8'
+rescue LoadError
+  require 'rubygems'
+  require 'v8'
+end
 
 module Node
   class Process
