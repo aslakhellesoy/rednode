@@ -5,11 +5,11 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "noderb"
-    gem.summary = %Q{TODO: LONGER DESCRIPTION}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "aslak.hellesoy@gmail.com"
+    gem.summary = %Q{Pure Ruby implementation of Node.js' native libraries.}
+    gem.description = %Q{Lets you run node.js apps without the node native runtime using V8, therubyracer and a pure ruby native runtime using Eventmachine}
+    gem.email = ["cowboyd@thefrontside.com", "aslak.hellesoy@gmail.com"]
     gem.homepage = "http://github.com/aslakhellesoy/noderb"
-    gem.authors = ["Aslak Hellesøy"]
+    gem.authors = ["Charles Lowell", "Aslak Hellesøy"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
