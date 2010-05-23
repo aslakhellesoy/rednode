@@ -1,5 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
-
+require 'erb'
 describe "Noderb" do
   it "should load v8 and be happy" do
     begin
