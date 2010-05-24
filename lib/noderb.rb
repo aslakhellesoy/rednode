@@ -5,6 +5,8 @@ rescue LoadError
   require 'v8'
 end
 
+raise "No NODE_HOME found" unless ENV['NODE_HOME']
+
 module Node
   class NativesModule
     Dir["#{ENV['NODE_HOME']}/lib/*.js"].each do |native_js|
@@ -51,12 +53,12 @@ module Node
   class Context < V8::Context
     def initialize
       super
-      raise "No NODE_HOME found" unless ENV['NODE_HOME']
       self['process'] = Process.new(self)
       self['exports'] = Exports.new
       self['rbputs'] = proc {|msg| puts "<pre>#{ERB::Util.h(msg)}</pre>"}
       self['rbinspect'] = proc {|msg| puts "<pre>#{ERB::Util.h(msg.inspect)}</pre>"}
-      self.load(File.join(ENV['NODE_HOME'], 'lib','module.js'))
+      main = self.load(File.join(ENV['NODE_HOME'], 'src', 'node.js'))
+      main.call(self.global, self['process'])
     end
   end
 end
