@@ -9,10 +9,12 @@ module Rednodejs
     # See fs.js:601:
     # fs.open(this.path, this.flags, this.mode, function(err, fd) {
     def open(path, flags, mode)
+      puts %{Fs.open(#{path.inspect}, #{flags.inspect}, #{mode.inspect})}
     end
 
     def read
       lambda do
+        puts "Fs.read"
       end
     end
 

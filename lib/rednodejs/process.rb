@@ -7,12 +7,7 @@ module Rednodejs
       @global = global
       @argv = argv
       @bindings = Hash.new do |h, mod|
-        name = mod.capitalize
-        if Rednodejs.const_defined?(name)
-          h[mod] = Rednodejs.const_get(name).new
-        else
-          raise LoadError, "No such module #{mod}"
-        end
+        h[mod] = Rednodejs.const_get(mod.capitalize).new
       end
       @env = @context.eval('new Object()')
       @env['NODE_DEBUG'] = true
