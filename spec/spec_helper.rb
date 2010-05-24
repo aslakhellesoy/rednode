@@ -7,6 +7,7 @@ require 'spec/autorun'
 require 'erb'
 def rputs(msg)
   puts "<div>#{ERB::Util.h(msg)}</div>"
+  $stdout.flush
 end
 
 Spec::Runner.configure do |config|
