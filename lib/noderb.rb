@@ -17,6 +17,36 @@ module Node
     end
   end
 
+  class BufferModule
+    def Buffer
+      lambda do
+      end
+    end
+  end
+
+  class FsModule
+    def Stats
+      lambda do
+      end
+    end
+
+    # TODO: Shouldn't we receive something for the anonymus "handler" function?
+    # See fs.js:601:
+    # fs.open(this.path, this.flags, this.mode, function(err, fd) {
+    def open(path, flags, mode)
+    end
+
+    def read
+      lambda do
+      end
+    end
+
+    def close
+      lambda do
+      end
+    end
+  end
+
   class Exports
   end
 
@@ -48,7 +78,8 @@ module Node
     end
 
     def EventEmitter
-      lambda{}
+      lambda do
+      end
     end
 
     def cwd
@@ -57,10 +88,24 @@ module Node
       end
     end
 
+    def checkBreak
+      lambda do
+      end
+    end
+
     def assert(bool)
       lambda do
         raise "Wasn't true" if !bool
       end
+    end
+
+    def loop
+      lambda do
+      end
+    end
+
+    def emit(what)
+      puts "EMIT #{what}"
     end
   end  
 
