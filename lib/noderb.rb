@@ -43,9 +43,9 @@ module Node
       @context.eval(source, name)
     end
 
-    # def EventEmitter
-    #   @context.eval("function() {}")
-    # end
+    def EventEmitter
+      lambda{}
+    end
   end  
 
   class Context < V8::Context
