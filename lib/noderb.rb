@@ -8,16 +8,13 @@ end
 module Node
   class NativesModule
     @libs = Dir["#{ENV['NODE_HOME']}/lib/*.js"].map do |native_js|
-      attr_name = File.basename(native_js, File.extname(native_js))
-      attr_name.to_sym
+      attribute = File.basename(native_js, File.extname(native_js)).to_sym
+      attr_reader attribute
+      attribute
     end
 
     def self.libs
       @libs
-    end
-
-    for mod in @libs do
-      self.send(:attr_reader, mod)
     end
 
     def initialize
