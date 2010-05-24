@@ -1,14 +1,17 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
-require 'erb'
-describe "Noderb" do
-  it "should load v8 and be happy" do
+
+describe "Node.rb" do
+  before do
     begin
-      cxt = Node::Context.new
-      cxt.load('server.js')
+      @node = Node::Context.new
     rescue V8::JavascriptError => e
       e.backtrace << "*** Here goes the Javascript trace ***"
       e.backtrace << e.javascript_stacktrace
       raise e
     end
+  end
+
+  it "should read files" do
+    @node.load('spec/files.js')
   end
 end
