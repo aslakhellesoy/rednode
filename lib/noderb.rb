@@ -7,32 +7,10 @@ end
 
 module Node
   class NativesModule
-    @libs = [
-      :assert,
-      :buffer,
-      :child_process,
-      :dns,
-      :events,
-      :file,
-      :freelist,
-      :fs,
-      :http,
-      :crypto,
-      :ini,
-      :mjsunit,
-      :net,
-      :posix,
-      :querystring,
-      :repl,
-      :sys,
-      :tcp,
-      :uri,
-      :url,
-      :utils,
-      :path,
-      :module,
-      :utf8decoder
-    ]
+    @libs = Dir["#{ENV['NODE_HOME']}/lib/*.js"].map do |native_js|
+      attr_name = File.basename(native_js, File.extname(native_js))
+      attr_name.to_sym
+    end
 
     def self.libs
       @libs
