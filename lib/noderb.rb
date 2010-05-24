@@ -7,28 +7,13 @@ end
 
 module Node
   class NativesModule
-    @libs = Dir["#{ENV['NODE_HOME']}/lib/*.js"].map do |native_js|
+    Dir["#{ENV['NODE_HOME']}/lib/*.js"].each do |native_js|
       attribute = File.basename(native_js, File.extname(native_js)).to_sym
-      attr_reader attribute
-      #define_method(attribute) do
-      #  instance_variable_get("@#{attribute}")
-      #end
-      attribute
-    end
-
-    def self.libs
-      @libs
-    end
-
-    def initialize
-      for mod in NativesModule.libs
-        lib = File.join(ENV['NODE_HOME'], 'lib', "#{mod}.js")
-        if File.file?(lib)
-          instance_variable_set("@#{mod}", File.read(lib))
-        else
-          raise LoadError, "no such node lib #{mod}"
+      class_eval(<<-ATTR, __FILE__, __LINE__)
+        def #{attribute}
+          @#{attribute} ||= File.read('#{native_js}')
         end
-      end
+      ATTR
     end
   end
 
