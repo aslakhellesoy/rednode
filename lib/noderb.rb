@@ -60,6 +60,12 @@ module Node
       main = self.load(File.join(ENV['NODE_HOME'], 'src', 'node.js'))
       main.call(self.global, self['process'])
     end
+    
+    def global
+      open do
+        V8::To.rb(@native.Global())
+      end
+    end
   end
 end
 
