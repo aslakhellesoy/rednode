@@ -9,11 +9,9 @@ module Node
   class NativesModule
     Dir["#{ENV['NODE_HOME']}/lib/*.js"].each do |native_js|
       attribute = File.basename(native_js, File.extname(native_js)).to_sym
-      class_eval(<<-ATTR, __FILE__, __LINE__)
-        def #{attribute}
-          @#{attribute} ||= File.read('#{native_js}')
-        end
-      ATTR
+      define_method(attribute) do || # Empty pipes needed to make ruby realize arity is 0.
+        File.read(native_js)
+      end
     end
   end
 
