@@ -1,11 +1,11 @@
 module Rednodejs
   class Process
-    attr_reader :env, :global, :argv
+    attr_reader :env, :global
 
-    def initialize(context, global, argv)
+    def initialize(context, global, main_js)
       @context = context
       @global = global
-      @argv = argv
+      @main_js = main_js
       @bindings = Hash.new do |h, mod|
         h[mod] = Rednodejs.const_get(mod.capitalize).new
       end
@@ -26,7 +26,7 @@ module Rednodejs
     end
     
     def argv
-      ['rednode', "arg1"]
+      ['rednodejs', @main_js]
     end
 
     def EventEmitter

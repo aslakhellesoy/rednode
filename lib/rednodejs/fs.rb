@@ -5,21 +5,30 @@ module Rednodejs
       end
     end
 
-    # TODO: Shouldn't we receive something for the anonymus "handler" function?
-    # See fs.js:601:
-    # fs.open(this.path, this.flags, this.mode, function(err, fd) {
-    def open(path, flags, mode)
+    def open(path, flags, mode, callback=nil)
       puts %{Fs.open(#{path.inspect}, #{flags.inspect}, #{mode.inspect})}
+      Fd.new(path, flags, mode, callback)
     end
 
-    def read
-      lambda do
-        puts "Fs.read"
-      end
+    def read(fd, buffer, offset, length, position)
+      puts %{Fs.read(#{fd.inspect}, #{buffer.inspect}, #{offset.inspect}, #{length.inspect}, #{position.inspect})}
+      fd.read(buffer, offset, length, position)
     end
 
     def close
       lambda do
+      end
+    end
+
+    class Fd
+      def initialize(path, flags, mode, callback)
+        @file = File.open(path, 'r')
+      end
+
+      def read(buffer, offset, length, position)
+        contents = @file.read
+        buffer.contents = contents
+        contents.length
       end
     end
   end
