@@ -76,6 +76,14 @@ module Node
     def compile(source, name = "<eval>")
       @context.eval(source, name)
     end
+    
+    def cwd(*a) #make it arity -1
+      Dir.pwd
+    end
+    
+    def argv
+      ['rednode', "arg1"]
+    end
 
     def EventEmitter
       lambda do
@@ -112,10 +120,9 @@ module Node
   class Context < V8::Context
     def initialize
       super
-      self['process'] = Process.new(self, @native.Global, %w{noderbjs dummy.js})
+      self['global'] = V8::To.rb(@native.Global())
+      self['process'] = Process.new(self, self['global'], %w{noderbjs dummy.js})
       self['exports'] = Exports.new
-      self['global'] = @native.Global
-      self['GLOBAL'] = @native.Global
       self['rbputs'] = proc {|msg| puts msg.to_s}
       self['rbinspect'] = proc {|msg| puts msg.inspect}
       main = self.load(File.join(ENV['NODE_HOME'], 'src', 'node.js'))
