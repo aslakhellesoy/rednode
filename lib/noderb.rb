@@ -21,10 +21,11 @@ module Node
   end
 
   class Process
-    attr_reader :env
+    attr_reader :env, :global
 
-    def initialize(context)
+    def initialize(context, global)
       @context = context
+      @global = global
       @bindings = Hash.new do |h, mod|
         name = mod.capitalize + "Module"
         if Node.const_defined?(name)
@@ -53,19 +54,15 @@ module Node
   class Context < V8::Context
     def initialize
       super
-      self['process'] = Process.new(self)
+      self['process'] = Process.new(self, @native.Global)
       self['exports'] = Exports.new
-      self['rbputs'] = proc {|msg| puts "<pre>#{ERB::Util.h(msg)}</pre>"}
-      self['rbinspect'] = proc {|msg| puts "<pre>#{ERB::Util.h(msg.inspect)}</pre>"}
+      self['global'] = @native.Global
+      self['GLOBAL'] = @native.Global
+      self['rbputs'] = proc {|msg| puts msg.to_s}
+      self['rbinspect'] = proc {|msg| puts msg.inspect}
       main = self.load(File.join(ENV['NODE_HOME'], 'src', 'node.js'))
       open do
-        main.call(self.global, self['process'])
-      end
-    end
-    
-    def global
-      open do
-        V8::To.rb(@native.Global())
+        main.call(self['global'], self['process'])
       end
     end
   end
