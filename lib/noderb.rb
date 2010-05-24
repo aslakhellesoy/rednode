@@ -10,6 +10,9 @@ module Node
     @libs = Dir["#{ENV['NODE_HOME']}/lib/*.js"].map do |native_js|
       attribute = File.basename(native_js, File.extname(native_js)).to_sym
       attr_reader attribute
+      #define_method(attribute) do
+      #  instance_variable_get("@#{attribute}")
+      #end
       attribute
     end
 
