@@ -34,10 +34,19 @@ module Rednodejs
       end
     end
 
+    def Timer
+      lambda do
+      end
+    end
+
     def cwd
       lambda do
         Dir.pwd
       end
+    end
+
+    def chdir(dir)
+      Dir.chdir(dir)
     end
 
     def checkBreak
@@ -57,6 +66,10 @@ module Rednodejs
     end
 
     def emit(what)
+    end
+
+    def _byteLength(s)
+      puts s
     end
   end
 end

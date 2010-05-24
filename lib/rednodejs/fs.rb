@@ -15,6 +15,9 @@ module Rednodejs
       fd.read(buffer, offset, length, position)
     end
 
+    def write(fd, buffer, offset, length, position, callback=nil)
+    end
+
     def close
       lambda do
       end
