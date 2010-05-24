@@ -7,7 +7,7 @@ end
 
 raise "No NODE_HOME found" unless ENV['NODE_HOME']
 
-module Node
+module Rednodejs
   class NativesModule
     Dir["#{ENV['NODE_HOME']}/lib/*.js"].each do |native_js|
       attribute = File.basename(native_js, File.extname(native_js)).to_sym
@@ -59,8 +59,8 @@ module Node
       @argv = argv
       @bindings = Hash.new do |h, mod|
         name = mod.capitalize + "Module"
-        if Node.const_defined?(name)
-          h[mod] = Node.const_get(name).new
+        if Rednodejs.const_defined?(name)
+          h[mod] = Rednodejs.const_get(name).new
         else
           raise LoadError, "No such module #{mod}"
         end

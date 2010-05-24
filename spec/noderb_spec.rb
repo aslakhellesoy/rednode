@@ -1,9 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Node.rb" do
+describe "Rednodejs" do
   before do
     begin
-      @node = Node::Context.new
+      @node = Rednodejs::Context.new
     rescue V8::JavascriptError => e
       e.backtrace << "*** Here goes the Javascript trace ***"
       e.backtrace << e.javascript_stacktrace
