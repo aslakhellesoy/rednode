@@ -20,6 +20,10 @@ module Rednodejs
       end
     end
 
+    def stat(path, callback=nil)
+      File.stat(path)
+    end
+
     class Fd
       def initialize(path, flags, mode, callback)
         @file = File.open(path, 'r')
