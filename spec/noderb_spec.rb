@@ -67,7 +67,7 @@ describe "Rednodejs" do
       # 'test-fs-read-buffer',
       # 'test-fs-read',
       # 'test-fs-readfile-empty',
-      # 'test-fs-realpath',
+      'test-fs-realpath',
       # 'test-fs-stat',
       # 'test-fs-symlink',
       # 'test-fs-write-buffer',

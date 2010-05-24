@@ -11,6 +11,10 @@ module Rednodejs
       end
       @env = @context.eval('new Object()')
       @env['NODE_DEBUG'] = true
+
+      @listeners = Hash.new do |listeners, event|
+        listeners[event] = []
+      end
     end
 
     def binding(name)
@@ -65,7 +69,20 @@ module Rednodejs
       end
     end
 
-    def emit(what)
+    def emit(event)
+      @listeners[event].each do |function|
+        begin
+          function.call(@global)
+        rescue => e
+          puts e.message
+        end
+      end
+    end
+
+    def addListener(event, function)
+      @listeners[event] << function
+      lambda do
+      end
     end
 
     def _byteLength(s)
