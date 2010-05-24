@@ -57,7 +57,6 @@ module Rednodejs
     end
 
     def emit(what)
-      puts "EMIT #{what}"
     end
   end
 end

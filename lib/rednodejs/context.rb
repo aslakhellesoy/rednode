@@ -13,8 +13,6 @@ module Rednodejs
       super
       self['global'] = V8::To.rb(@native.Global)
       self['exports'] = Exports.new
-      self['rbputs'] = proc {|msg| puts msg.to_s}
-      self['rbinspect'] = proc {|msg| puts msg.inspect}
     end
 
     def run(main_js)
