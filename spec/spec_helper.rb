@@ -4,6 +4,11 @@ require 'noderb'
 require 'spec'
 require 'spec/autorun'
 
+require 'erb'
+def rputs(msg)
+  puts "<div>#{ERB::Util.h(msg)}</div>"
+end
+
 Spec::Runner.configure do |config|
   
 end
