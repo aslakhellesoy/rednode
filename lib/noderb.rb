@@ -21,17 +21,18 @@ module Node
   end
 
   class Process
-    attr_reader :env, :global
+    attr_reader :env, :global, :argv
 
-    def initialize(context, global)
+    def initialize(context, global, argv)
       @context = context
       @global = global
+      @argv = argv
       @bindings = Hash.new do |h, mod|
         name = mod.capitalize + "Module"
         if Node.const_defined?(name)
           h[mod] = Node.const_get(name).new
         else
-          raise LoadError, "no such module #{mod}"
+          raise LoadError, "No such module #{mod}"
         end
       end
       @env = @context.eval('new Object()')
@@ -49,12 +50,24 @@ module Node
     def EventEmitter
       lambda{}
     end
+
+    def cwd
+      lambda do
+        Dir.pwd
+      end
+    end
+
+    def assert(bool)
+      lambda do
+        raise "Wasn't true" if !bool
+      end
+    end
   end  
 
   class Context < V8::Context
     def initialize
       super
-      self['process'] = Process.new(self, @native.Global)
+      self['process'] = Process.new(self, @native.Global, %w{noderbjs dummy.js})
       self['exports'] = Exports.new
       self['global'] = @native.Global
       self['GLOBAL'] = @native.Global
