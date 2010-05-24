@@ -58,7 +58,9 @@ module Node
       self['rbputs'] = proc {|msg| puts "<pre>#{ERB::Util.h(msg)}</pre>"}
       self['rbinspect'] = proc {|msg| puts "<pre>#{ERB::Util.h(msg.inspect)}</pre>"}
       main = self.load(File.join(ENV['NODE_HOME'], 'src', 'node.js'))
-      main.call(self.global, self['process'])
+      open do
+        main.call(self.global, self['process'])
+      end
     end
     
     def global
