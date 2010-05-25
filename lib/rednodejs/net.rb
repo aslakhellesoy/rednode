@@ -1,4 +1,4 @@
 module Rednodejs
-  class Net
+  class Net < BindingModule
   end
 end

@@ -1,25 +1,22 @@
 module Rednodejs
-  class Buffer
+  class Buffer < BindingModule
     def Buffer
-      lambda do |*length|
-        NativeBuffer.new(length)
+      lambda do |length|
+        StringBuffer.new(length)
       end
     end
 
-    class NativeBuffer
-      attr_reader :length
-      
-      def initialize(length)
-        @length = length
-      end
+    class StringBuffer
+      attr_reader :length, :__buffer
 
-      def contents=(contents) 
-        @contents = contents
+      def initialize(length)
+        @__buffer = ''
+        @length = length
       end
 
       def toString
         lambda do
-          @contents
+          @__buffer
         end
       end
     end

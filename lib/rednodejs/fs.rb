@@ -1,13 +1,17 @@
 module Rednodejs
-  class Fs
+  class Fs < BindingModule
     def Stats
       lambda do
       end
     end
 
     def open(path, flags, mode, callback=nil)
-      #puts %{Fs.open(#{path.inspect}, #{flags.inspect}, #{mode.inspect})}
-      Fd.new(path, flags, mode, callback)
+      fd = Fd.new(path, flags, mode)
+      if(callback)
+        callback.call(@context['global'], nil, fd)
+      else
+        fd
+      end
     end
 
     def read(fd, buffer, offset, length, position)
@@ -39,30 +43,55 @@ module Rednodejs
     end
 
     def lstat(path, callback=nil)
-      lstat = File.lstat(path)
+      _stat(File.lstat(path), callback)
+    end
 
-      def lstat.isSymbolicLink
+    def stat(path, callback=nil)
+      _stat(File.stat(path), callback)
+    end
+
+    def fstat(fd, callback=nil)
+      stats = fd.fstat
+      if(callback)
+        callback.call(@context['global'], nil, stats)
+      else
+        stats
+      end
+    end
+
+    def _stat(__stat, callback)
+      def __stat.isSymbolicLink
         lambda do
           symlink? ? true : nil
         end
       end
 
-      lstat
-    end
-
-    def stat(path, callback=nil)
-      File.stat(path)
+      if(callback)
+        callback.call(@context['global'], nil, __stat)
+      else
+        __stat
+      end
     end
 
     class Fd
-      def initialize(path, flags, mode, callback)
-        @file = File.open(path, 'r')
+      def initialize(path, flags, mode)
+        @path = path
       end
 
       def read(buffer, offset, length, position)
-        contents = @file.read
-        buffer.contents = contents
-        contents.length
+        @file ||= File.open(@path)
+        begin
+          @file.seek(position, IO::SEEK_SET) if position
+          read = @file.readpartial(length, buffer.__buffer)
+          read.length
+        rescue EOFError
+          @file.close
+          0
+        end
+      end
+
+      def fstat
+        File.fstat(@path)
       end
     end
   end

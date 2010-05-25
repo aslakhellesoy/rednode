@@ -67,8 +67,8 @@ describe "Rednodejs" do
       # 'test-fs-read-buffer',
       # 'test-fs-read',
       # 'test-fs-readfile-empty',
-      'test-fs-realpath',
-      # 'test-fs-stat',
+      # 'test-fs-realpath',
+#'test-fs-stat',
       # 'test-fs-symlink',
       # 'test-fs-write-buffer',
       # 'test-fs-write-sync',
@@ -126,7 +126,6 @@ describe "Rednodejs" do
       # 'test-utf8-scripts'
     ].each do |test|
       it "should run node's simple/#{test}.js'" do
-        puts test
         v8 do
           node("#{ENV['NODE_HOME']}/test/simple/#{test}.js")
         end

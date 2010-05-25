@@ -1,5 +1,5 @@
 module Rednodejs
-  class Natives
+  class Natives < BindingModule
     @@scripts = {}
     
     Dir["#{ENV['NODE_HOME']}/lib/*.js"].each do |native_js|

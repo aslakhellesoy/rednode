@@ -12,7 +12,7 @@ module Rednodejs
     def initialize
       super
       self['global'] = V8::To.rb(@native.Global)
-      self['exports'] = Exports.new
+      self['exports'] = Exports.new(self)
     end
 
     def run(main_js)

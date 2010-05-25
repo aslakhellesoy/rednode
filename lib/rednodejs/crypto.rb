@@ -1,4 +1,4 @@
 module Rednodejs
-  class Crypto
+  class Crypto < BindingModule
   end
 end

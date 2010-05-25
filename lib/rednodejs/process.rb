@@ -7,7 +7,7 @@ module Rednodejs
       @global = global
       @main_js = main_js
       @bindings = Hash.new do |h, mod|
-        h[mod] = Rednodejs.const_get(mod.capitalize).new
+        h[mod] = Rednodejs.const_get(mod.capitalize).new(context)
       end
       @env = @context.eval('new Object()')
       @env['NODE_DEBUG'] = true

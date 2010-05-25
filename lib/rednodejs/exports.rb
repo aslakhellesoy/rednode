@@ -1,4 +1,4 @@
 module Rednodejs
-  class Exports
+  class Exports < BindingModule
   end
 end
