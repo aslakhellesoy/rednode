@@ -11,7 +11,7 @@ module Rednodejs
   class Context < V8::Context
     def initialize
       super
-      self['global'] = V8::To.rb(@native.Global)
+      self['global'] = self.scope
       self['exports'] = Exports.new(self)
     end
 
