@@ -24,7 +24,15 @@ module Rednodejs
     def compile(source, name = "<eval>")
       @context.eval(source, name)
     end
-    
+
+    def stdout
+      STDOUT
+    end
+
+    def stderr
+      STDERR
+    end
+
     def cwd(*a) #make it arity -1
       Dir.pwd
     end

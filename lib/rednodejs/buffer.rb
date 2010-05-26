@@ -1,8 +1,8 @@
 module Rednodejs
   class Buffer < BindingModule
     def Buffer
-      lambda do |length|
-        StringBuffer.new(length)
+      lambda do |*length|
+        StringBuffer.new(length[0])
       end
     end
 

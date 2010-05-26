@@ -6,7 +6,6 @@ describe "Rednodejs" do
     @io = StringIO.new
     @node = Rednodejs::Context.new
     @node['specputs'] = proc {|msg| @io.puts(msg.to_s); @io.flush}
-    @node['rbputs'] = proc {|msg| STDOUT.puts(msg.to_s); STDOUT.flush}
     @node.run(main_js)
   end
 
