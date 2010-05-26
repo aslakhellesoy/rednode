@@ -67,7 +67,19 @@ describe "Rednodejs" do
       # 'test-fs-read',
       # 'test-fs-readfile-empty',
       # 'test-fs-realpath',
-#'test-fs-stat',
+
+# Uncommenting the next test will cause the specs to segfault.
+# This appears to be happening in sys.js/exports.inspect
+# when it tries to do var keys = Object.keys(value);
+# This is happening when test-fs-stat.js invokes p(stats);
+# because in sys.js/exports.p invokes sys.js/exports.inspect
+#
+# I'm not sure what causes the segfault. I tried to reproduce
+# it with a simpler case in redjs, but was unsuccessful.
+#
+# Aslak
+
+# 'test-fs-stat',
       # 'test-fs-symlink',
       # 'test-fs-write-buffer',
       # 'test-fs-write-sync',
