@@ -138,7 +138,7 @@ describe "Rednodejs" do
     ].each do |test|
       it "should run node's simple/#{test}.js'" do
         v8 do
-          node("#{ENV['NODE_HOME']}/test/simple/#{test}.js")
+          node("#{Rednodejs::NODELIB}/test/simple/#{test}.js")
         end
       end
     end

@@ -1,9 +1,14 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'rednodejs'
-require 'spec'
-require 'spec/autorun'
-
+begin
+  require 'spec'
+  require 'spec/autorun'
+rescue LoadError
+  require 'rubygems'
+  require 'spec'
+  require 'spec/autorun'
+end
 require 'erb'
 def rputs(msg)
   puts "<div>#{ERB::Util.h(msg)}</div>"

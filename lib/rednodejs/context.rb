@@ -5,9 +5,11 @@ rescue LoadError
   require 'v8'
 end
 
-raise "No NODE_HOME found" unless ENV['NODE_HOME']
+
+# ENV['NODE_HOME'] = File.expand_path(File.join(File.dirname(__FILE__), 'node')) unless ENV['NODE_HOME']
 
 module Rednodejs
+  NODELIB = ENV['NODE_HOME'] || File.expand_path(File.join(File.dirname(__FILE__), 'node'))
   class Context < V8::Context
     def initialize
       super
@@ -17,10 +19,8 @@ module Rednodejs
 
     def run(main_js)
       self['process'] = Process.new(self, self['global'], main_js)
-      node = self.load(File.join(ENV['NODE_HOME'], 'src', 'node.js'))
-      open do
-        node.call(self['global'], self['process'])
-      end
+      node = self.load(File.join(NODELIB, 'src', 'node.js'))
+      node.call(self['global'], self['process'])
     end
   end
 end
