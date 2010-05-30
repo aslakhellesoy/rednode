@@ -91,8 +91,27 @@ module Rednodejs
       end
 
       def fstat
-        File.fstat(@path)
+        File.stat(@path)
       end
     end
+  end
+end
+
+class File::Stat
+  defalias = proc do |cls, name, actual|
+    cls.send(:define_method, name) do
+      self.send(actual) ? true : false
+    end
+  end
+  {
+    :isDirectory => :directory?,
+    :isFile => :file?,
+    :isSocket => :socket?,
+    :isBlockDevice => :blockdev?,
+    :isCharacterDevice => :chardev?,
+    :isFIFO => :pipe?,
+    :isSymbolicLink => :symlink?
+  }.each do |method, actual|
+    defalias[self, method, actual]
   end
 end
