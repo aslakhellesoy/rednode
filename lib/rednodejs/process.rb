@@ -80,7 +80,7 @@ module Rednodejs
     def emit(event)
       @listeners[event].each do |function|
         begin
-          function.call(@global)
+          function.call()
         rescue => e
           puts e.message
         end

@@ -20,7 +20,7 @@ module Rednodejs
     def run(main_js)
       self['process'] = Process.new(self, self['global'], main_js)
       node = self.load(File.join(NODELIB, 'src', 'node.js'))
-      node.call(self['global'], self['process'])
+      node.call(self['process'])
     end
   end
 end
