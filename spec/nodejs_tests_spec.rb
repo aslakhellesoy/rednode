@@ -64,7 +64,7 @@ describe "Rednode" do
       # 'test-http-exceptions',
       # 'test-http-full-response',
       # 'test-http-malformed-request',
-      # 'test-http-parser',
+      'test-http-parser',
       # 'test-http-proxy',
       # 'test-http-server',
       # 'test-http-set-timeout',

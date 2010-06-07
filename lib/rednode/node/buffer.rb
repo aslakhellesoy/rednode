@@ -5,7 +5,7 @@ module Rednode::Node
         StringBuffer.new(length[0])
       end
     end
-
+  
     class StringBuffer
       attr_reader :length, :__buffer
 
@@ -18,6 +18,14 @@ module Rednode::Node
         lambda do
           @__buffer
         end
+      end
+      
+      def asciiWrite(string, offset, length)
+        @__buffer << string
+      end
+
+      def asciiSlice(from, to)
+        @__buffer[from..to]
       end
     end
   end
