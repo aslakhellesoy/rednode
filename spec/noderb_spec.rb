@@ -3,31 +3,12 @@ require 'stringio'
 
 describe "Rednodejs" do
   def node(main_js)
-    @io = StringIO.new
-    @node = Rednodejs::Context.new
-    @node['specputs'] = proc {|msg| @io.puts(msg.to_s); @io.flush}
-    @node.run(main_js)
-  end
-
-  def assert_io(expected)
-    @io.rewind
-    @io.read.should == expected
-  end
-
-  def v8
     begin
-      yield
+      Rednodejs::Context.new.run(main_js)
     rescue V8::JavascriptError => e
       e.backtrace << "*** Here goes the Javascript trace ***"
       e.backtrace << e.javascript_stacktrace
       raise e
-    end
-  end
-
-  it "should load fs and sys" do
-    v8 do
-      node('spec/files.js')
-      assert_io("WooooooooT\n");
     end
   end
 
@@ -67,19 +48,7 @@ describe "Rednodejs" do
       # 'test-fs-read',
       # 'test-fs-readfile-empty',
       # 'test-fs-realpath',
-
-# Uncommenting the next test will cause the specs to segfault.
-# This appears to be happening in sys.js/exports.inspect
-# when it tries to do var keys = Object.keys(value);
-# This is happening when test-fs-stat.js invokes p(stats);
-# because in sys.js/exports.p invokes sys.js/exports.inspect
-#
-# I'm not sure what causes the segfault. I tried to reproduce
-# it with a simpler case in redjs, but was unsuccessful.
-#
-# Aslak
-
-# 'test-fs-stat',
+      # 'test-fs-stat',
       # 'test-fs-symlink',
       # 'test-fs-write-buffer',
       # 'test-fs-write-sync',
@@ -126,7 +95,7 @@ describe "Rednodejs" do
       # 'test-stdin-from-file',
       # 'test-stdout-to-file',
       # 'test-sync-fileread',
-      # 'test-sys',
+      'test-sys',
       # 'test-tcp-binary',
       # 'test-tcp-keepalive',
       # 'test-tcp-reconnect',
@@ -134,12 +103,10 @@ describe "Rednodejs" do
       # 'test-umask',
       'test-url',
       # 'test-utf8-decoder',
-      # 'test-utf8-scripts'
+      'test-utf8-scripts'
     ].each do |test|
       it "should run node's simple/#{test}.js'" do
-        v8 do
-          node("#{Rednodejs::NODELIB}/test/simple/#{test}.js")
-        end
+        node("#{Rednodejs::NODELIB}/test/simple/#{test}.js")
       end
     end
   end
