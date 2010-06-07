@@ -5,11 +5,8 @@ rescue LoadError
   require 'v8'
 end
 
-
-# ENV['NODE_HOME'] = File.expand_path(File.join(File.dirname(__FILE__), 'node')) unless ENV['NODE_HOME']
-
 module Rednode
-  NODELIB = ENV['NODE_HOME'] || File.expand_path(File.join(File.dirname(__FILE__), 'node'))
+  NODELIB = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'ext', 'node'))
   class Context < V8::Context
     def initialize
       super
