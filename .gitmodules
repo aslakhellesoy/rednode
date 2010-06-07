@@ -1,3 +1,0 @@
-[submodule "lib/rednodejs/node"]
-	path = lib/rednodejs/node
-	url = git://github.com/ry/node.git
