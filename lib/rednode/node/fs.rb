@@ -1,4 +1,4 @@
-module Rednode
+module Rednode::Node
   class Fs < BindingModule
     def Stats
       lambda do

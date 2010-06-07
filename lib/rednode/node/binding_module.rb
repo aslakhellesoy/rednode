@@ -1,4 +1,4 @@
-module Rednode
+module Rednode::Node
   class BindingModule
     def initialize(context)
       @context = context

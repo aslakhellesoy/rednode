@@ -1,4 +1,4 @@
-module Rednode
+module Rednode::Node
   class Exports < BindingModule
   end
 end

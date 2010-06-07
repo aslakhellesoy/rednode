@@ -1,4 +1,4 @@
-module Rednode
+module Rednode::Node
   class Buffer < BindingModule
     def Buffer
       lambda do |*length|

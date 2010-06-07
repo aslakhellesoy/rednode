@@ -1,4 +1,4 @@
-module Rednode
+module Rednode::Node
   class Stdio < BindingModule
     def isStdoutBlocking
       lambda do
