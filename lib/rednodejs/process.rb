@@ -1,4 +1,4 @@
-module Rednodejs
+module Rednode
   class Process
     attr_reader :env, :global
 
@@ -7,7 +7,7 @@ module Rednodejs
       @global = global
       @main_js = main_js
       @bindings = Hash.new do |h, mod|
-        h[mod] = Rednodejs.const_get(mod.capitalize).new(context)
+        h[mod] = Rednode.const_get(mod.capitalize).new(context)
       end
       @env = @context.eval('new Object()')
       @env['NODE_DEBUG'] = true

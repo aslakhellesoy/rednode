@@ -1,4 +1,4 @@
-module Rednodejs
+module Rednode
   class Cares < BindingModule
     def Channel(what)
     end

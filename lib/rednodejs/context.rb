@@ -8,7 +8,7 @@ end
 
 # ENV['NODE_HOME'] = File.expand_path(File.join(File.dirname(__FILE__), 'node')) unless ENV['NODE_HOME']
 
-module Rednodejs
+module Rednode
   NODELIB = ENV['NODE_HOME'] || File.expand_path(File.join(File.dirname(__FILE__), 'node'))
   class Context < V8::Context
     def initialize

@@ -1,10 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 require 'stringio'
 
-describe "Rednodejs" do
+describe "Rednode" do
   def node(main_js)
     begin
-      Rednodejs::Context.new.run(main_js)
+      Rednode::Context.new.run(main_js)
     rescue V8::JavascriptError => e
       e.backtrace << "*** Here goes the Javascript trace ***"
       e.backtrace << e.javascript_stacktrace
@@ -106,7 +106,7 @@ describe "Rednodejs" do
       'test-utf8-scripts'
     ].each do |test|
       it "should run node's simple/#{test}.js'" do
-        node("#{Rednodejs::NODELIB}/test/simple/#{test}.js")
+        node("#{Rednode::NODELIB}/test/simple/#{test}.js")
       end
     end
   end

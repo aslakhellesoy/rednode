@@ -1,4 +1,4 @@
-module Rednodejs
+module Rednode
   autoload :BindingModule,  'rednodejs/binding_module'
   autoload :Buffer,  'rednodejs/buffer'
   autoload :Crypto,  'rednodejs/crypto'
