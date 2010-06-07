@@ -7,7 +7,8 @@ module Rednode::Node
       @global = global
       @main_js = main_js
       @bindings = Hash.new do |h, mod|
-        h[mod] = Rednode::Node.const_get(mod.capitalize).new(context)
+        module_name = camelize(mod)
+        h[mod] = Rednode::Node.const_get(module_name).new(context)
       end
       @env = @context.eval('new Object()')
       @env['NODE_DEBUG'] = true
@@ -96,5 +97,12 @@ module Rednode::Node
     def _byteLength(s)
       puts s
     end
+
+  private
+
+    def camelize(s)
+      s.gsub(/(^.|_.)/) {|l| l[-1..-1].upcase}
+    end
+
   end
 end
