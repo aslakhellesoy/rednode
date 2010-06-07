@@ -5,7 +5,14 @@ rescue LoadError
   require 'v8'
 end
 
-require 'rednode/node'
+module Rednode
+  module Node
+  end
+end
+
+require 'rednode/node/binding_module'
+require 'rednode/node/exports'
+require 'rednode/node/process'
 
 module Rednode
   NODELIB = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'ext', 'node'))

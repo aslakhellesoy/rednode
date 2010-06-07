@@ -7,6 +7,7 @@ module Rednode::Node
       @global = global
       @main_js = main_js
       @bindings = Hash.new do |h, mod|
+        require "rednode/node/#{mod}"
         module_name = camelize(mod)
         h[mod] = Rednode::Node.const_get(module_name).new(context)
       end
