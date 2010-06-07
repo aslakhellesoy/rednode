@@ -53,7 +53,7 @@ module Rednodejs
     def fstat(fd, callback=nil)
       stats = fd.fstat
       if(callback)
-        callback.call(@context['global'], nil, stats)
+        callback.call(nil, stats)
       else
         stats
       end
@@ -67,7 +67,7 @@ module Rednodejs
       end
 
       if(callback)
-        callback.call(@context['global'], nil, __stat)
+        callback.call(nil, __stat)
       else
         __stat
       end
