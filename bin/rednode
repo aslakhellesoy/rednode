@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+$:.unshift(File.dirname(__FILE__) + '/../lib') unless $:.include?(File.dirname(__FILE__) + '/../lib')
+
+require 'rednode'
+Rednode::Context.new.run(ARGV[0])
