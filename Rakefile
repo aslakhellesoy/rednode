@@ -4,11 +4,11 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "noderb"
+    gem.name = "rednode"
     gem.summary = %Q{Pure Ruby implementation of Node.js' native libraries.}
     gem.description = %Q{Lets you run node.js apps without the node native runtime using V8, therubyracer and a pure ruby native runtime using Eventmachine}
     gem.email = ["cowboyd@thefrontside.com", "aslak.hellesoy@gmail.com"]
-    gem.homepage = "http://github.com/aslakhellesoy/noderb"
+    gem.homepage = "http://github.com/cowboyd/rednode"
     gem.authors = ["Charles Lowell", "Aslak Hellesøy"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
@@ -40,7 +40,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "noderb #{version}"
+  rdoc.title = "Rednode #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
