@@ -1,20 +1,13 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'rednode'
 begin
-  require 'spec'
-  require 'spec/autorun'
+  require 'rspec/autorun'
 rescue LoadError
   require 'rubygems'
-  require 'spec'
-  require 'spec/autorun'
+  require 'rspec/autorun'
 end
+
 require 'erb'
 def rputs(msg)
   puts "<div>#{ERB::Util.h(msg)}</div>"
   $stdout.flush
-end
-
-Spec::Runner.configure do |config|
-  
 end
