@@ -22,4 +22,4 @@ that runs in the same process as Ruby.
 
 == Copyright
 
-Copyright (c) 2010 Aslak Hellesøy. See LICENSE for details.
+Copyright (c) 2010 Charles Lowell, Aslak Hellesøy. See LICENSE for details.
