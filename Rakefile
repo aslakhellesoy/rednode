@@ -10,7 +10,9 @@ begin
     gem.email = ["cowboyd@thefrontside.com", "aslak.hellesoy@gmail.com"]
     gem.homepage = "http://github.com/cowboyd/rednode"
     gem.authors = ["Charles Lowell", "Aslak Hellesøy"]
+    gem.add_dependency "therubyracer", ">= 0.7.1"
     gem.add_development_dependency "rspec", ">= 2.0.0.beta.11"
+    gem.add_development_dependency "jeweler", ">= 1.4.0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
