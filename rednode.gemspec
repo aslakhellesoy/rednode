@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Charles Lowell", "Aslak Helles\303\270y"]
-  s.date = %q{2010-06-08}
+  s.date = %q{2010-06-10}
   s.default_executable = %q{rednode}
   s.description = %q{Lets you run node.js apps without the node native runtime using V8, therubyracer and a pure ruby native runtime using Eventmachine}
   s.email = ["cowboyd@thefrontside.com", "aslak.hellesoy@gmail.com"]
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     ".document",
      ".gitignore",
      ".gitmodules",
+     ".rspec",
      "LICENSE",
      "README.rdoc",
      "Rakefile",
@@ -40,8 +41,8 @@ Gem::Specification.new do |s|
      "lib/rednode/node/net.rb",
      "lib/rednode/node/process.rb",
      "lib/rednode/node/stdio.rb",
+     "rednode.gemspec",
      "spec/nodejs_tests_spec.rb",
-     "spec/spec.opts",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/cowboyd/rednode}
@@ -60,14 +61,17 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<therubyracer>, [">= 0.7.1"])
-      s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
+      s.add_development_dependency(%q<rspec>, [">= 2.0.0.beta.11"])
+      s.add_development_dependency(%q<jeweler>, [">= 1.4.0"])
     else
       s.add_dependency(%q<therubyracer>, [">= 0.7.1"])
-      s.add_dependency(%q<rspec>, [">= 1.2.9"])
+      s.add_dependency(%q<rspec>, [">= 2.0.0.beta.11"])
+      s.add_dependency(%q<jeweler>, [">= 1.4.0"])
     end
   else
     s.add_dependency(%q<therubyracer>, [">= 0.7.1"])
-    s.add_dependency(%q<rspec>, [">= 1.2.9"])
+    s.add_dependency(%q<rspec>, [">= 2.0.0.beta.11"])
+    s.add_dependency(%q<jeweler>, [">= 1.4.0"])
   end
 end
 
