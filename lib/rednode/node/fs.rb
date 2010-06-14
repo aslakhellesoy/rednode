@@ -8,7 +8,7 @@ module Rednode::Node
     def open(path, flags, mode, callback=nil)
       fd = Fd.new(path, flags, mode)
       if(callback)
-        callback.call(@context['global'], nil, fd)
+        callback.call(nil, fd)
       else
         fd
       end
@@ -53,21 +53,15 @@ module Rednode::Node
     def fstat(fd, callback=nil)
       stats = fd.fstat
       if(callback)
-        callback.call(nil, stats)
+        callback.call(stats)
       else
         stats
       end
     end
 
     def _stat(__stat, callback)
-      def __stat.isSymbolicLink
-        lambda do
-          symlink? ? true : nil
-        end
-      end
-
       if(callback)
-        callback.call(nil, __stat)
+        callback.call(false, __stat)
       else
         __stat
       end

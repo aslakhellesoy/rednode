@@ -3,13 +3,7 @@ require 'stringio'
 
 describe "Rednode" do
   def node(main_js)
-    begin
-      Rednode::Context.new.run(main_js)
-    rescue V8::JavascriptError => e
-      e.backtrace << "*** Here goes the Javascript trace ***"
-      e.backtrace << e.javascript_stacktrace
-      raise e
-    end
+    Rednode::Context.new.run(main_js)
   end
 
   context 'simple' do
@@ -48,7 +42,7 @@ describe "Rednode" do
       # 'test-fs-read',
       # 'test-fs-readfile-empty',
       # 'test-fs-realpath',
-      # 'test-fs-stat',
+      'test-fs-stat',
       # 'test-fs-symlink',
       # 'test-fs-write-buffer',
       # 'test-fs-write-sync',
