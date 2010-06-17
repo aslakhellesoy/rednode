@@ -14,7 +14,7 @@ module Rednode::Node
       end
     end
 
-    def read(fd, buffer, offset, length, position)
+    def read(fd, buffer, offset, length, position, callback = nil)
       #puts %{Fs.read(#{fd.inspect}, #{buffer.inspect}, #{offset.inspect}, #{length.inspect}, #{position.inspect})}
       fd.read(buffer, offset, length, position)
     end
