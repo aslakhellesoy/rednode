@@ -43,11 +43,15 @@ module Rednode::Node
     end
 
     def lstat(path, callback=nil)
-      _stat(File.lstat(path), callback)
+      _stat(callback) do
+        File.lstat(path)
+      end
     end
 
     def stat(path, callback=nil)
-      _stat(File.stat(path), callback)
+      _stat(callback) do
+        File.stat(path)
+      end
     end
 
     def fstat(fd, callback=nil)
@@ -59,11 +63,18 @@ module Rednode::Node
       end
     end
 
-    def _stat(__stat, callback)
+    def _stat(callback)
       if(callback)
-        callback.call(false, __stat)
+        error = false
+        stat = nil
+        begin
+          stat = yield
+        rescue SystemCallError => e
+          error = true
+        end
+        callback.call(error, stat)
       else
-        __stat
+        yield
       end
     end
 

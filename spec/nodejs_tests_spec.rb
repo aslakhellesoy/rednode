@@ -32,7 +32,7 @@ describe "Rednode" do
       # 'test-event-emitter-remove-listeners',
       # 'test-exception-handler',
       # 'test-exec',
-      # 'test-file-read-noexist',
+      'test-file-read-noexist',
       # 'test-file-read-stream',
       # 'test-file-write-stream',
       # 'test-fs-chmod',
