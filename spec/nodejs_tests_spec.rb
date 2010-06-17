@@ -35,7 +35,7 @@ describe "Rednode" do
       'test-file-read-noexist',
       # 'test-file-read-stream',
       # 'test-file-write-stream',
-      # 'test-fs-chmod',
+      'test-fs-chmod',
       # 'test-fs-error-messages',
       # 'test-fs-fsync',
       # 'test-fs-read-buffer',

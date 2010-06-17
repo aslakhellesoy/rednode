@@ -19,6 +19,15 @@ module Rednode::Node
       fd.read(buffer, offset, length, position)
     end
 
+    def chmod(path, mode, callback = nil)
+      begin
+        File.chmod(mode, path)
+        callback.call(false) if callback
+      rescue SystemCallError => e
+        callback.call(true) if callback
+      end
+    end
+
     def write(fd, buffer, offset, length, position, callback=nil)
     end
 
