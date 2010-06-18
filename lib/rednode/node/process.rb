@@ -44,8 +44,7 @@ module Rednode::Node
     end
 
     def EventEmitter
-      lambda do
-      end
+      Rednode::EventEmitter
     end
 
     def Timer
