@@ -76,7 +76,7 @@ describe "Rednode" do
       # 'test-next-tick',
       'test-path',
       # 'test-pipe-head',
-      # 'test-querystring',
+      'test-querystring',
       'test-readdir',
       # 'test-regression-object-prototype',
       # 'test-repl',
