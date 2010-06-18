@@ -28,7 +28,7 @@ describe "Rednode" do
       # 'test-error-reporting',
       # 'test-eval-cx',
       'test-event-emitter-add-listeners',
-      # 'test-event-emitter-modify-in-emit',
+      'test-event-emitter-modify-in-emit',
       'test-event-emitter-remove-listeners',
       # 'test-exception-handler',
       # 'test-exec',

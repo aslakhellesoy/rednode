@@ -8,7 +8,7 @@ module Rednode
       when V8::Function
         notify.methodcall(self, *args)
       when V8::Array
-        notify.each {|listener| listener.methodcall(self, *args) if listener}
+        notify.to_a.each {|listener| listener.methodcall(self, *args) if listener}
       else
         return false
       end
