@@ -98,6 +98,10 @@ module Rednode::Node
       puts s
     end
 
+    def umask(mask = nil)
+      mask ? File.umask(mask) : File.umask
+    end
+
   private
 
     def camelize(s)
