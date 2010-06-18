@@ -19,6 +19,18 @@ module Rednode::Node
       fd.read(buffer, offset, length, position)
     end
 
+    def readdir(path, callback = nil)
+      if callback
+        begin
+          callback.call(false, Dir.entries(path)[2..-1])
+        rescue SystemCallError => e
+          callback.call(true)
+        end
+      else
+        Dir.entries(path)[2..-1]
+      end
+    end
+
     def chmod(path, mode, callback = nil)
       begin
         File.chmod(mode, path)

@@ -77,7 +77,7 @@ describe "Rednode" do
       'test-path',
       # 'test-pipe-head',
       # 'test-querystring',
-      # 'test-readdir',
+      'test-readdir',
       # 'test-regression-object-prototype',
       # 'test-repl',
       # 'test-script-new',
