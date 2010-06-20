@@ -84,6 +84,20 @@ module Rednode::Node
       end
     end
 
+    def fsync(fd, callback = nil)
+      begin
+        fd.fsync
+      rescue SystemCallError => e
+        puts "#{e.class}: #{e.message}\n#{e.backtrace.join("\n")}"
+        callback.call(true) if callback
+      end
+      callback.call(false) if callback
+    end
+
+    def fdatasync(fd, callback = nil)
+      fsync(fd, callback)
+    end
+
     def _stat(callback)
       if(callback)
         error = false
@@ -118,6 +132,12 @@ module Rednode::Node
 
       def fstat
         File.stat(@path)
+      end
+
+      def fsync
+        File.open(@path, "w+") do |f|
+          f.fsync
+        end
       end
     end
   end
