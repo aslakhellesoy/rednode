@@ -87,11 +87,10 @@ module Rednode::Node
     def fsync(fd, callback = nil)
       begin
         fd.fsync
+        callback.call(false) if callback
       rescue SystemCallError => e
-        puts "#{e.class}: #{e.message}\n#{e.backtrace.join("\n")}"
         callback.call(true) if callback
       end
-      callback.call(false) if callback
     end
 
     def fdatasync(fd, callback = nil)
