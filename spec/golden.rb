@@ -1,7 +1,8 @@
 
 {
   "simple" => [
-    "assert"
+    "assert",
+    "buffer"
   ],
   "pummel" => [
   ]

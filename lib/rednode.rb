@@ -1,4 +1,5 @@
 
+require 'rubygems'
 module Rednode
   NODE_HOME = File.expand_path(File.dirname(__FILE__) + '/../ext/node')
   require 'rednode/node'
