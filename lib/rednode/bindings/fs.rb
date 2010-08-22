@@ -1,12 +1,8 @@
 module Rednode::Bindings
   class Fs
-    
+    include Namespace
     def initialize
       @descriptors = {}
-    end
-    
-    def Stats
-      Fs::Stats
     end
 
     def open(path, flags, mode)
@@ -25,7 +21,7 @@ module Rednode::Bindings
     
     def read(fd, buffer, offset, length, position)
       file(fd) do |f|
-        raise "Second argument needs to be a buffer" unless buffer.kind_of?(Buffer::StringBuffer)
+        raise "Second argument needs to be a buffer" unless buffer.kind_of?(Buffer::Buffer)
         raise "Offset is out of bounds" unless offset <= buffer.length
         raise "Length is extends beyond buffer" unless (offset + length) <= buffer.length
         f.seek(position) if position

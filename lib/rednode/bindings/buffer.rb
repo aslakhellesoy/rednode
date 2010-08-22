@@ -1,10 +1,7 @@
 module Rednode::Bindings
   class Buffer
-    def Buffer
-      StringBuffer
-    end
-
-    class StringBuffer
+    include Namespace
+    class Buffer
       attr_reader :length, :data
       protected :data
 

@@ -1,6 +1,6 @@
 module Rednode::Bindings
   class Cares
-    include Rednode::Namespace
+    include Namespace
         
     class Channel
       def initialize(opts)

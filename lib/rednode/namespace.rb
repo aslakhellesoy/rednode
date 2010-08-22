@@ -8,4 +8,7 @@ module Rednode
       end
     end
   end
+  module Bindings
+    Namespace = Rednode::Namespace
+  end
 end
