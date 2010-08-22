@@ -1,5 +1,5 @@
 module Rednode
-  class EventEmitter
+  module EventEmitter
     attr_accessor :_events
 
     def emit(e, *args)

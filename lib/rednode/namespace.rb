@@ -1,7 +1,11 @@
 module Rednode
   module Namespace
     def [](name)
-      name == name.capitalize && self.class.const_defined?(name) ? self.class.const_get(name) : yield
+      begin
+        self.class.const_defined?(name) ? self.class.const_get(name) : yield
+      rescue NameError => e
+        yield
+      end
     end
   end
 end

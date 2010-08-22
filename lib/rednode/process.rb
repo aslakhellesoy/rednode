@@ -1,6 +1,7 @@
 
 module Rednode
-  class Process < EventEmitter
+  class Process
+    include EventEmitter
     include Constants
     include Namespace
     attr_reader :global, :env
@@ -44,12 +45,7 @@ module Rednode
     
     def loop(*args)
     end
-    
-    const_set(:EventEmitter, EventEmitter)
-    def EventEmitter
-      self.class.const_get(:EventEmitter)
-    end
-    
+        
     class Env
       def [](property)
         ENV.has_key?(property) ? ENV[property] : yield
@@ -57,6 +53,10 @@ module Rednode
     end
     
     class Timer
+    end
+    
+    class EventEmitter
+      include Rednode::EventEmitter
     end
   end
 end
