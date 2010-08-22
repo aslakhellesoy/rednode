@@ -8,9 +8,24 @@ module Rednode::Bindings
       attr_reader :length, :data
       protected :data
 
-      def initialize(length)
-        @length = length
-        @data = " " * length
+      def initialize(opt, *args)
+        case opt
+        when Numeric
+          @length = opt
+          @data = " " * @length
+        when V8::Array
+          @length = opt
+          opt.each_with_index do |byte, i|
+            @data[i] = opt[i]
+          end
+        when String
+          @length = opt.length
+          @data = opt.dup
+        when self.class
+          raise "Not Yet Implemented"
+        else
+          raise "Bad argument"
+        end
       end
       
       def utf8Slice(start, stop)

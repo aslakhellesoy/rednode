@@ -35,6 +35,14 @@ module Rednode::Bindings
         bytes.length
       end
     end
+
+    def write(fd, buffer, offset, length, position, callback = nil)
+      file(fd) do |f|
+        f.seek(position) if position
+        data = buffer.send(:data)
+        file.write(data[offset, length])
+      end
+    end
     
     def stat(path)
       Stats.new(path)
