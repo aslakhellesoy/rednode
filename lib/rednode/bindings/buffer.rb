@@ -65,8 +65,20 @@ module Rednode::Bindings
         raise "not yet implemented"
       end
 
-      def copy(target, position, start, finish)
-        raise "not yet implemented"
+      def copy(target, position, start, finish = self.length)
+        raise "First arg should be a Buffer" unless target.kind_of?(self.class)
+        raise "sourceEnd < sourceStart" if finish < start
+        return 0 if start == finish
+
+        raise "targetStart out of bounds" if position < 0 || position >= target.length
+        raise "sourceStart out of bounds" if start < 0 || start >= self.length
+        raise "sourceEnd out of bounds" if finish < 0 || finish > self.length
+
+        to_copy = [finish - start, target.length - position].min.tap do |bytes|
+          for i in 0..bytes - 1
+            target[i] = self[i]
+          end
+        end
       end
     end
   end
