@@ -62,7 +62,11 @@ module Rednode::Bindings
       end
 
       def asciiWrite(string, offset)
-        0
+        raise "Argument must be a string" unless string.kind_of?(String)
+        raise "Offset is out of bounds" if string.length > 0 && offset >= self.length
+        to_write = [string.length, self.length - offset].min
+        @data[offset, to_write] = string.unpack('C*')
+        to_write
       end
 
       def binaryWrite(string, offset)
