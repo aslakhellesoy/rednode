@@ -8,7 +8,7 @@ module Rednode::Bindings
       def initialize(opt, *args)
         case opt
         when Numeric
-          @length = opt
+          @length = opt.to_i
           @data = " " * @length
         when V8::Array
           @length = opt
@@ -24,23 +24,50 @@ module Rednode::Bindings
           raise "Bad argument"
         end
       end
-      
+
+      def [](index)
+        index.kind_of?(Numeric) ? @data[index] : yield
+      end
+
+      def []=(index, value)
+        index.kind_of?(Numeric) ? @data[index] = value : yield
+      end
+
       def utf8Slice(start, stop)
         @data[start, stop]
       end
-      
+
       def asciiSlice(start, stop)
         @data[start, stop]
       end
-      
+
       def binarySlice(start, stop)
         @data[start, stop]
       end
-      
+
       def base64Slice(start, stop)
         @data[start, stop]
       end
 
+      def utf8Write(string, offset)
+        raise "not yet implemented"
+      end
+
+      def asciiWrite(string, offset)
+        raise "not yet implemented"
+      end
+
+      def binaryWrite(string, offset)
+        raise "not yet implemented"
+      end
+
+      def binaryWrite(string, offset)
+        raise "not yet implemented"
+      end
+
+      def copy(target, position, start, finish)
+        raise "not yet implemented"
+      end
     end
   end
 end
