@@ -8,7 +8,7 @@ module Rednode::Bindings
       def initialize(opt, *args)
         case opt
         when Numeric
-          @data = Array.new(opt, 0)
+          @data = Array.new(opt.to_i, 0)
         when V8::Array
           @data = opt.to_a
         when String
