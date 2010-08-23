@@ -46,7 +46,7 @@ module Rednode::Bindings
       end
 
       def asciiSlice(start, stop)
-        @data[start, stop].pack('a*')
+        @data[start, stop].pack('C*')
       end
 
       def binarySlice(start, stop)
