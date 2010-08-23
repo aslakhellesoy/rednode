@@ -2,27 +2,35 @@ module Rednode::Bindings
   class Buffer
     include Namespace
     class Buffer
-      attr_reader :length, :data
+      attr_reader :data
       protected :data
 
       def initialize(opt, *args)
         case opt
         when Numeric
-          @length = opt.to_i
-          @data = " " * @length
+          @data = Array.new(opt, 0)
         when V8::Array
-          @length = opt
-          opt.each_with_index do |byte, i|
-            @data[i] = opt[i]
-          end
+          @data = opt.to_a
         when String
-          @length = opt.length
-          @data = opt.dup
+          encoding = *args
+          enc = case encoding
+            when nil,'utf8','utf-8' then 'U*'
+            when 'ascii' then 'a*'
+            when 'base64' then 'm*'
+            when 'binary' then 'C*'
+            else
+              warn "unknown encoding: #{encoding}"; 'C*'
+          end
+          @data = opt.unpack(enc)
         when self.class
-          raise "Not Yet Implemented"
+          @data = []
         else
           raise "Bad argument"
         end
+      end
+      
+      def length
+        @data.length
       end
 
       def [](index)
@@ -34,11 +42,11 @@ module Rednode::Bindings
       end
 
       def utf8Slice(start, stop)
-        @data[start, stop]
+        @data[start, stop].pack('U*')
       end
 
       def asciiSlice(start, stop)
-        @data[start, stop]
+        @data[start, stop].pack('a*')
       end
 
       def binarySlice(start, stop)
@@ -46,7 +54,7 @@ module Rednode::Bindings
       end
 
       def base64Slice(start, stop)
-        @data[start, stop]
+        @data[start, stop].pack('m*')
       end
 
       def utf8Write(string, offset)

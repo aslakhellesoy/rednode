@@ -27,7 +27,7 @@ module Rednode::Bindings
         f.seek(position) if position
         data = buffer.send(:data)
         bytes = f.read(length)
-        data[offset, bytes.length] = bytes
+        data[offset, bytes.length] = bytes.unpack('U*')
         bytes.length
       end
     end
@@ -37,6 +37,7 @@ module Rednode::Bindings
         f.seek(position) if position
         data = buffer.send(:data)
         file.write(data[offset, length])
+        # file.write(buffer.utf8Slice)
       end
     end
     
