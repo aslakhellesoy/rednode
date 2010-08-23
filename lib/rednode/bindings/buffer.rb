@@ -50,19 +50,19 @@ module Rednode::Bindings
       end
 
       def utf8Write(string, offset)
-        raise "not yet implemented"
+        0
       end
 
       def asciiWrite(string, offset)
-        raise "not yet implemented"
+        0
       end
 
       def binaryWrite(string, offset)
-        raise "not yet implemented"
+        0
       end
 
       def binaryWrite(string, offset)
-        raise "not yet implemented"
+        0
       end
 
       def copy(target, position, start, finish = self.length)
