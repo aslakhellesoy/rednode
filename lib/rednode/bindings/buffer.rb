@@ -46,7 +46,14 @@ module Rednode::Bindings
       end
 
       def asciiSlice(start, stop)
-        @data[start, stop].pack('C*')
+        raise ArgumentError, "Bad argument." unless start.kind_of?(Numeric) && stop.kind_of?(Numeric)
+        raise ArgumentError, "Bad argument." if start < 0 || stop < 0
+        raise ArgumentError, "Must have start <= end" unless start <= stop
+        raise ArgumentError, "end cannot be longer than parent" if stop > @data.length
+
+        @data[start, stop].pack('C*').tap do |slice|
+          # puts "Buffer(#{self.length}).asciiSlice(#{start}, #{stop}) -> #{slice}"
+        end
       end
 
       def binarySlice(start, stop)
