@@ -51,17 +51,17 @@ module Rednode::Bindings
         raise ArgumentError, "Must have start <= end" unless start <= stop
         raise ArgumentError, "end cannot be longer than parent" if stop > @data.length
 
-        @data[start, stop].pack('C*').tap do |slice|
+        @data[start..stop].pack('C*').tap do |slice|
           # puts "Buffer(#{self.length}).asciiSlice(#{start}, #{stop}) -> #{slice}"
         end
       end
 
       def binarySlice(start, stop)
-        @data[start, stop]
+        @data[start..stop]
       end
 
       def base64Slice(start, stop)
-        @data[start, stop].pack('m*')
+        @data[start..stop].pack('m*')
       end
 
       def utf8Write(string, offset)
@@ -80,7 +80,7 @@ module Rednode::Bindings
         0
       end
 
-      def binaryWrite(string, offset)
+      def base64Write(string, offset)
         0
       end
 
