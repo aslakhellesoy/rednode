@@ -23,7 +23,8 @@ module Rednode::Bindings
           end
           @data = opt.unpack(enc)
         when self.class
-          @data = []
+          start, stop = *args
+          @data = opt.send(:data)[start..stop-1]
         else
           raise "Bad argument"
         end
@@ -41,6 +42,19 @@ module Rednode::Bindings
         index.kind_of?(Numeric) ? @data[index] = value : yield
       end
 
+      def slice(start, stop)
+        Buffer.new(self, start, stop)
+      end
+
+      def unpack(format, index)
+        raise ArgumentError, "Argument must be a string" unless format.kind_of?(String)
+        #TODO: maybe unpack these directly instead of packing and unpacking.
+        @data[index..-1].pack('C*').unpack(format).tap do |array|
+          # puts "unpack(#{format}, index) -> #{array.inspect}"
+          raise ArgumentError, "Out of bounds" if array.last.nil?
+        end
+      end
+
       def utf8Slice(start, stop)
         @data[start, stop].pack('U*')
       end
@@ -51,17 +65,17 @@ module Rednode::Bindings
         raise ArgumentError, "Must have start <= end" unless start <= stop
         raise ArgumentError, "end cannot be longer than parent" if stop > @data.length
 
-        @data[start..stop].pack('C*').tap do |slice|
+        @data[start..stop-1].pack('C*').tap do |slice|
           # puts "Buffer(#{self.length}).asciiSlice(#{start}, #{stop}) -> #{slice}"
         end
       end
 
       def binarySlice(start, stop)
-        @data[start..stop]
+        @data[start..stop-1]
       end
 
       def base64Slice(start, stop)
-        @data[start..stop].pack('m*')
+        @data[start..stop-1].pack('m*')
       end
 
       def utf8Write(string, offset)
