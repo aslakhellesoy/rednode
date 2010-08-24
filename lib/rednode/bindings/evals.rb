@@ -1,10 +1,6 @@
-module Rednode::Node
-  class Evals < BindingModule
-
-    def Script
-      ::Rednode::Node::Evals::Script
-    end
-
+module Rednode::Bindings
+  class Evals
+    include Namespace
     class Script
       def initialize(source)
         @source = source
