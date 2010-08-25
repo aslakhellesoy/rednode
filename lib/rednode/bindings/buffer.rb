@@ -12,16 +12,7 @@ module Rednode::Bindings
         when V8::Array
           @data = opt.to_a
         when String
-          encoding = *args
-          enc = case encoding
-            when nil,'utf8','utf-8' then 'U*'
-            when 'ascii' then 'a*'
-            when 'base64' then 'm*'
-            when 'binary' then 'C*'
-            else
-              warn "unknown encoding: #{encoding}"; 'C*'
-          end
-          @data = opt.unpack(enc)
+          @data = opt.unpack('C*')
         when self.class
           start, stop = *args
           @data = opt.send(:data)[start..stop-1]
@@ -56,7 +47,7 @@ module Rednode::Bindings
       end
 
       def utf8Slice(start, stop)
-        @data[start, stop].pack('U*')
+        @data[start..stop-1].pack('C*')
       end
 
       def asciiSlice(start, stop)
@@ -79,7 +70,15 @@ module Rednode::Bindings
       end
 
       def utf8Write(string, offset)
-        0
+        written = 0
+        string.scan(/./mu) do |codepoint|
+          bytes = codepoint.unpack('C*')
+          if bytes.length <= self.length - offset - written
+            @data[offset + written, bytes.length] = bytes
+            written += bytes.length
+          end
+        end
+        return written
       end
 
       def asciiWrite(string, offset)
@@ -91,6 +90,7 @@ module Rednode::Bindings
       end
 
       def binaryWrite(string, offset)
+        raise "Argument must be a string" unless string.kind_of?(String)
         0
       end
 
