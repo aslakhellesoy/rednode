@@ -1,6 +1,6 @@
 = Rednode
 
-Rednode is a pure ruby implementation of the native C++ parts of Node.js. 
+Rednode is a pure ruby implementation of the native C++ parts of Node.js (currently very incomplete, but it's a start). 
 Rednode uses http://github.com/cowboyd/therubyracer - an embedded V8 engine
 that runs in the same process as Ruby.
 
