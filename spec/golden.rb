@@ -2,7 +2,8 @@
 {
   "simple" => [
     "assert",
-    "buffer"
+    "buffer",
+    "byte-length"
   ],
   "pummel" => [
   ]

@@ -43,6 +43,11 @@ module Rednode
       Dir.pwd
     end
 
+    def _byteLength(str, encoding = 'utf8')
+      chars = encoding == 'utf8' ? str.unpack('C*') : str.unpack('U*')
+      chars.length
+    end
+
     def loop(*args)
     end
 
