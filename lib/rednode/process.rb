@@ -52,6 +52,11 @@ module Rednode
       chars.length
     end
 
+    #TODO: find a good place to read this.
+    def version
+      "0.2.0"
+    end
+
     def loop(*args)
     end
 
