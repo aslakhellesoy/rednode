@@ -6,7 +6,8 @@
     "byte-length",
     "chdir",
     "script-context",
-    "script-new"
+    "script-new",
+    "script-static-context"
   ],
   "pummel" => [
   ]

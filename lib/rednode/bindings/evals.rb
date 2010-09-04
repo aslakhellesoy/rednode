@@ -6,12 +6,24 @@ module Rednode::Bindings
         @source = source
       end
 
-      def createContext(properties = {})
+      def self.createContext(properties = {})
         ::Rednode::Bindings::Evals::Context.new(properties)
+      end
+
+      def createContext(*args)
+        self.class.createContext(*args)
+      end
+
+      def self.runInContext(source, context)
+        new(source).runInContext(context)
       end
 
       def runInContext(context)
         context.send(:eval, @source)
+      end
+
+      def self.runInNewContext(*args)
+
       end
 
       def runInNewContext(sandbox = nil)
@@ -39,8 +51,6 @@ module Rednode::Bindings
         thisContext.eval(@source, "<script>")
       end
 
-      def self.runInNewContext(*args)
-      end
     end
 
     class Context
