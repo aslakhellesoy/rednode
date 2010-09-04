@@ -16,7 +16,8 @@ module Rednode::Bindings
           @data = case encoding
           when 'ascii'                        then opt.unpack('U*')
           when 'utf8','utf-8','binary',nil    then opt.unpack('C*')
-          when 'base64'                       then opt.unpack('m').first.unpack('C*')  
+          when 'base64'
+            (opt + "=" * (4 - opt.length % 4)).unpack('m').first.unpack('C*')
           else
             raise "Unknown encoding"
           end
