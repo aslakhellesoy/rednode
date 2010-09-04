@@ -5,7 +5,7 @@ module Rednode
     include Constants
     include Namespace
     attr_reader :global, :env
-    
+
     def initialize(node)
       @node = node
       @engine = node.engine
@@ -13,7 +13,7 @@ module Rednode
       @bindings = {}
       @env = Env.new
     end
-    
+
     def binding(id)
       if @bindings[id]
         @bindings[id]
@@ -30,31 +30,31 @@ module Rednode
         raise "no such module: #{id}"
       end
     end
-    
+
     def compile(source, filename)
       @engine.eval(source, filename)
     end
-    
+
     def argv
       ['rednode', @node.main]
     end
-    
+
     def cwd(*args)
       Dir.pwd
     end
-    
+
     def loop(*args)
     end
-        
+
     class Env
       def [](property)
         ENV.has_key?(property) ? ENV[property] : yield
       end
     end
-    
+
     class Timer
     end
-    
+
     class EventEmitter
       include Rednode::EventEmitter
     end
