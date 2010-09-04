@@ -3,7 +3,8 @@
   "simple" => [
     "assert",
     "buffer",
-    "byte-length"
+    "byte-length",
+    "chdir"
   ],
   "pummel" => [
   ]

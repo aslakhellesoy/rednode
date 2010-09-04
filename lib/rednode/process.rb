@@ -43,6 +43,10 @@ module Rednode
       Dir.pwd
     end
 
+    def chdir(dirname)
+      Dir.chdir(dirname)
+    end
+
     def _byteLength(str, encoding = 'utf8')
       chars = encoding == 'utf8' ? str.unpack('C*') : str.unpack('U*')
       chars.length
