@@ -6,6 +6,14 @@ module Rednode::Bindings
         @source = source
       end
 
+      def createContext(properties = {})
+        ::Rednode::Bindings::Evals::Context.new(properties)
+      end
+
+      def runInContext(context)
+        context.send(:eval, @source)
+      end
+
       def runInNewContext(sandbox = nil)
         newContext = V8::Context.new
         sandbox = nil unless sandbox.kind_of?(V8::Object)
@@ -29,6 +37,28 @@ module Rednode::Bindings
           @scope = V8::To.rb(@native.Global())
         end
         thisContext.eval(@source, "<script>")
+      end
+
+      def self.runInNewContext(*args)
+      end
+    end
+
+    class Context
+      def initialize(properties)
+        @cxt = ::V8::Context.new
+        for k,v in properties
+          @cxt[k] = v
+        end
+      end
+
+      protected
+
+      def eval(source)
+        @cxt.eval(source)
+      end
+
+      def [](name)
+        @cxt[name]
       end
     end
   end

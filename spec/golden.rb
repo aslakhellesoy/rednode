@@ -4,7 +4,8 @@
     "assert",
     "buffer",
     "byte-length",
-    "chdir"
+    "chdir",
+    "script-context"
   ],
   "pummel" => [
   ]
