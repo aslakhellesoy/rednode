@@ -5,7 +5,8 @@
     "buffer",
     "byte-length",
     "chdir",
-    "script-context"
+    "script-context",
+    "script-new"
   ],
   "pummel" => [
   ]
