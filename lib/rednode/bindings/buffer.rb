@@ -13,7 +13,13 @@ module Rednode::Bindings
           @data = opt.to_a
         when String
           encoding = *args
-          @data = encoding == 'ascii' ? opt.unpack('U*') : opt.unpack('C*')
+          @data = case encoding
+          when 'ascii'                        then opt.unpack('U*')
+          when 'utf8','utf-8','binary',nil    then opt.unpack('C*')
+          when 'base64'                       then opt.unpack('m').first.unpack('C*')  
+          else
+            raise "Unknown encoding"
+          end
         when self.class
           start, stop = *args
           @data = opt.send(:data)[start..stop-1]
