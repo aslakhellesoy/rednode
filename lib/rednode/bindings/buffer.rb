@@ -67,7 +67,7 @@ module Rednode::Bindings
       end
 
       def base64Slice(start, stop)
-        @data[start..stop-1].pack('m*')
+        [@data[start..stop-1].pack('C*')].pack('m').gsub(/\n/,'')
       end
 
       def utf8Write(string, offset)
