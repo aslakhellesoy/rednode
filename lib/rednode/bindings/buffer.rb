@@ -12,7 +12,8 @@ module Rednode::Bindings
         when V8::Array
           @data = opt.to_a
         when String
-          @data = opt.unpack('C*')
+          encoding = *args
+          @data = encoding == 'ascii' ? opt.unpack('U*') : opt.unpack('C*')
         when self.class
           start, stop = *args
           @data = opt.send(:data)[start..stop-1]
