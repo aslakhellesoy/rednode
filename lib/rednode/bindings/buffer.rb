@@ -46,9 +46,7 @@ module Rednode::Bindings
 
       def unpack(format, index)
         raise ArgumentError, "Argument must be a string" unless format.kind_of?(String)
-        #TODO: maybe unpack these directly instead of packing and unpacking.
         @data[index..-1].pack('C*').unpack(format).tap do |array|
-          # puts "unpack(#{format}, index) -> #{array.inspect}"
           raise ArgumentError, "Out of bounds" if array.last.nil?
         end
       end
