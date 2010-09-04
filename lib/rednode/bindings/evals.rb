@@ -22,17 +22,17 @@ module Rednode::Bindings
         context.send(:eval, @source)
       end
 
-      def self.runInNewContext(*args)
-
+      def self.runInNewContext(source, sandbox = nil, filename = nil)
+        new(source).runInNewContext(sandbox, filename)
       end
 
-      def runInNewContext(sandbox = nil)
+      def runInNewContext(sandbox = nil, filename = nil)
         newContext = V8::Context.new
         sandbox = nil unless sandbox.kind_of?(V8::Object)
         for key, value in sandbox
           newContext[key] = value
         end if sandbox
-        newContext.eval(@source, "<script>").tap do
+        newContext.eval(@source, filename || "<script>").tap do
           for key, value in newContext.scope
             sandbox[key] = value
           end if sandbox

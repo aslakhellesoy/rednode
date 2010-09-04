@@ -7,7 +7,8 @@
     "chdir",
     "script-context",
     "script-new",
-    "script-static-context"
+    "script-static-context",
+    "script-static-new"
   ],
   "pummel" => [
   ]
