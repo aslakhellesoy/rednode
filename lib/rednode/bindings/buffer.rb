@@ -96,7 +96,12 @@ module Rednode::Bindings
       end
 
       def base64Write(string, offset)
-        0
+        return 0 if offset == 0 && self.length == 0
+        raise "Offset is out of bounds" if offset >= self.length
+        bytes = string.unpack('m').first.unpack('C*')
+        raise "Buffer too small" if bytes.length > (self.length - offset)
+        @data[offset, bytes.length] = bytes
+        bytes.length
       end
 
       def copy(target, position, start, finish = self.length)
