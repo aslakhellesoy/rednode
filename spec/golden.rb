@@ -8,7 +8,8 @@
     "script-context",
     "script-new",
     "script-static-context",
-    "script-static-new"
+    "script-static-new",
+    "script-static-this"
   ],
   "pummel" => [
   ]

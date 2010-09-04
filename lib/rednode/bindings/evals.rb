@@ -39,16 +39,21 @@ module Rednode::Bindings
         end
       end
 
-      def runInThisContext(sandbox = nil)
+      def self.runInThisContext(source, sandbox = nil, filename = nil)
+        new(source).runInThisContext(sandbox, filename)
+      end
+
+      def runInThisContext(sandbox = nil, filename = nil)
         #mini-hack: there isn't a way to get the current V8::Context
         #as a high level context in therubyracer, so we hack the constructor
         #we wished existed that binds to the underlying current C::Context
         thisContext = V8::Context.allocate
         thisContext.instance_eval do
           @native = V8::C::Context::GetEntered()
-          @scope = V8::To.rb(@native.Global())
+          portal = V8::Portal.new(thisContext, V8::Access.new)
+          @scope = portal.rb(@native.Global())
         end
-        thisContext.eval(@source, "<script>")
+        thisContext.eval(@source, filename || "<script>")
       end
 
     end
