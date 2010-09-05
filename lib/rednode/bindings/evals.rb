@@ -22,8 +22,11 @@ module Rednode::Bindings
         context.send(:eval, @source)
       end
 
-      def self.runInNewContext(source, sandbox = nil, filename = nil)
-        new(source).runInNewContext(sandbox, filename)
+      def self.runInNewContext
+        lambda do |source, *args|
+          sandbox, filename = *args
+          new(source).runInNewContext(sandbox, filename)
+        end
       end
 
       def runInNewContext(sandbox = nil, filename = nil)

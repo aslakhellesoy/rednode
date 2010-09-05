@@ -5,6 +5,7 @@
     "buffer",
     "byte-length",
     "chdir",
+    "eval-cx",
     "script-context",
     "script-new",
     "script-static-context",
