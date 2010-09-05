@@ -11,7 +11,8 @@
     "script-static-context",
     "script-static-new",
     "script-static-this",
-    "script-this"
+    "script-this",
+    "utf8-scripts"
   ],
   "pummel" => [
   ]
