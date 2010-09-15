@@ -10,7 +10,7 @@ $gem = Gem::Specification.new do |gem|
   gem.email = ["cowboyd@thefrontside.com", "aslak.hellesoy@gmail.com"]
   gem.homepage = "http://github.com/cowboyd/rednode"
   gem.authors = ["Charles Lowell", "Aslak Hellesøy"]
-  gem.add_dependency "therubyracer", ">= 0.7.5"
+  gem.add_dependency "therubyracer", ">= 0.8.0"
   gem.add_development_dependency "rspec", ">= 2.0.0.beta.19"
 end
 
