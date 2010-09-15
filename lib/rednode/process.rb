@@ -1,7 +1,6 @@
 
 module Rednode
-  class Process
-    include EventEmitter
+  class Process < EventEmitter
     include Constants
     include Namespace
     attr_reader :global, :env
@@ -69,8 +68,6 @@ module Rednode
     class Timer
     end
 
-    class EventEmitter
-      include Rednode::EventEmitter
-    end
+    EventEmitter = self.superclass
   end
 end
