@@ -11,6 +11,7 @@
     "fs-stat",
     "fs-fsync",
     "fs-read-buffer",
+    "fs-read-file-sync",
     "script-context",
     "script-new",
     "script-static-context",
