@@ -68,6 +68,17 @@ module Rednode::Bindings
       end
     end
 
+    def fsync(fd, callback = nil)
+      async(callback) do
+        file(fd) do |f|
+          f.fsync
+        end
+      end
+    end
+
+    #TODO: figure out how to call fdatasync from ruby
+    alias_method :fdatasync, :fsync
+
     class Stats
       def initialize(stat)
         @stat = stat

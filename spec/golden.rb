@@ -9,6 +9,7 @@
     "file-read-noexist",
     "fs-chmod",
     "fs-stat",
+    "fs-fsync",
     "script-context",
     "script-new",
     "script-static-context",
