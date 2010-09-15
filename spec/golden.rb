@@ -6,6 +6,7 @@
     "byte-length",
     "chdir",
     "eval-cx",
+    "file-read-noexist",
     "script-context",
     "script-new",
     "script-static-context",

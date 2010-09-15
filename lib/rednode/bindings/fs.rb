@@ -40,8 +40,16 @@ module Rednode::Bindings
       end
     end
 
-    def stat(path)
-      Stats.new(path)
+    def stat(path, callback = nil)
+      if callback
+        begin
+          callback.call(Stats.new(path))
+        rescue StandardError => e
+          callback.call(true, nil)
+        end
+      else
+        Stats.new(path)
+      end
     end
 
     class Stats
