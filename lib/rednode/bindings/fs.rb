@@ -5,10 +5,18 @@ module Rednode::Bindings
       @descriptors = {}
     end
 
-    def open(path, flags, mode)
-      file = File.new(path, flags, mode)
-      file.fileno.tap do |fd|
-        @descriptors[fd] = file
+    def chmod(path, mode, callback = nil)
+      async(callback) do
+        File.chmod(mode, path)
+      end
+    end
+
+    def open(path, flags, mode, callback = nil)
+      async(callback) do
+        file = File.new(path, flags, mode)
+        file.fileno.tap do |fd|
+          @descriptors[fd] = file
+        end
       end
     end
 
@@ -41,24 +49,40 @@ module Rednode::Bindings
     end
 
     def stat(path, callback = nil)
-      if callback
-        begin
-          callback.call(Stats.new(path))
-        rescue StandardError => e
-          callback.call(true, nil)
+      async(callback) do
+        Stats.new(File.stat(path))
+      end
+    end
+
+    def lstat(path, callback = nil)
+      async(callback) do
+        Stats.new(File.lstat(path))
+      end
+    end
+
+    def fstat(fd, callback = nil)
+      async(callback) do
+        file(fd) do |f|
+          Stats.new(f.stat)
         end
-      else
-        Stats.new(path)
       end
     end
 
     class Stats
-      def initialize(path)
-        @stat = File.new(path).stat
+      def initialize(stat)
+        @stat = stat
       end
 
       def size
         @stat.size
+      end
+
+      def mtime
+        @stat.mtime
+      end
+      
+      def mode
+        @stat.mode
       end
     end
 
@@ -67,6 +91,25 @@ module Rednode::Bindings
     def file(fd)
       if file = @descriptors[fd]
         yield file
+      end
+    end
+
+    def async(callback)
+      if callback
+        begin
+          result = yield
+          begin
+            callback.call(false, result)
+          rescue Exception
+          end
+        rescue Exception => e
+          begin
+            callback.call(true,e)
+          rescue Exception => e
+          end
+        end
+      else
+        yield
       end
     end
   end

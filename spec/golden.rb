@@ -7,6 +7,8 @@
     "chdir",
     "eval-cx",
     "file-read-noexist",
+    "fs-chmod",
+    "fs-stat",
     "script-context",
     "script-new",
     "script-static-context",
