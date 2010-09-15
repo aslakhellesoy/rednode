@@ -27,16 +27,18 @@ module Rednode::Bindings
       end
     end
 
-    def read(fd, buffer, offset, length, position)
-      file(fd) do |f|
-        raise "Second argument needs to be a buffer" unless buffer.kind_of?(Buffer::Buffer)
-        raise "Offset is out of bounds" unless offset <= buffer.length
-        raise "Length is extends beyond buffer" unless (offset + length) <= buffer.length
-        f.seek(position) if position
-        data = buffer.send(:data)
-        bytes = f.read(length)
-        data[offset, bytes.length] = bytes.unpack('C*')
-        bytes.length
+    def read(fd, buffer, offset, length, position, callback = nil)
+      raise "Second argument needs to be a buffer" unless buffer.kind_of?(Buffer::Buffer)
+      raise "Offset is out of bounds" unless offset <= buffer.length
+      raise "Length is extends beyond buffer" unless (offset + length) <= buffer.length
+      async(callback) do
+        file(fd) do |f|
+          f.seek(position) if position
+          data = buffer.send(:data)
+          bytes = f.read(length)
+          data[offset, bytes.length] = bytes.unpack('C*')
+          bytes.length
+        end
       end
     end
 

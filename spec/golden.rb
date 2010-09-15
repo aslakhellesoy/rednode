@@ -10,6 +10,7 @@
     "fs-chmod",
     "fs-stat",
     "fs-fsync",
+    "fs-read-buffer",
     "script-context",
     "script-new",
     "script-static-context",
