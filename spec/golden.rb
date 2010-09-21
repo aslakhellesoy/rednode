@@ -16,6 +16,8 @@
     "fs-read",
     "fs-readfile-empty",
     "fs-realpath",
+    "fs-stat",
+    "fs-symlink",
     "script-context",
     "script-new",
     "script-static-context",
