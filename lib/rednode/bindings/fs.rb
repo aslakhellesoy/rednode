@@ -78,6 +78,48 @@ module Rednode::Bindings
       end
     end
 
+    def readlink(path, callback = nil)
+      async(callback) do
+        File.readlink(path)
+      end
+    end
+
+    def link(old_name, new_name, callback = nil)
+      async(callback) do
+        File.link(old_name, new_name)
+      end
+    end
+
+    def unlink(filename, callback = nil)
+      async(callback) do
+        File.unlink(filename)
+      end
+    end
+
+    def rename(old_name, new_name, callback = nil)
+      async(callback) do
+        File.rename(old_name, new_name)
+      end
+    end
+
+    def rmdir(dir, callback = nil)
+      async(callback) do
+        Dir.rmdir(dir)
+      end
+    end
+
+    def mkdir(name, mode, callback = nil)
+      async(callback) do
+        Dir.mkdir(name)
+      end
+    end
+
+    def readdir(name, callback = nil)
+      async(callback) do
+        Dir.new(name).to_a
+      end
+    end
+
     #TODO: figure out how to call fdatasync from ruby
     alias_method :fdatasync, :fsync
 
@@ -117,7 +159,7 @@ module Rednode::Bindings
           end
         rescue Exception => e
           begin
-            callback.call(true,e)
+            callback.call(e,nil)
           rescue Exception => e
           end
         end

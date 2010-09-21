@@ -8,6 +8,7 @@
     "eval-cx",
     "file-read-noexist",
     "fs-chmod",
+    "fs-error-messages",
     "fs-stat",
     "fs-fsync",
     "fs-read-buffer",
