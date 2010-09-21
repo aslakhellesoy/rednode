@@ -90,6 +90,12 @@ module Rednode::Bindings
       end
     end
 
+    def symlink(old_name, new_name, callback = nil)
+      async(callback) do
+        File.symlink(old_name, new_name)
+      end
+    end
+
     def unlink(filename, callback = nil)
       async(callback) do
         File.unlink(filename)
@@ -135,9 +141,25 @@ module Rednode::Bindings
       def mtime
         @stat.mtime
       end
-      
+
       def mode
         @stat.mode
+      end
+
+      def isSymbolicLink(*a)
+        @stat.symlink?
+      end
+
+      def isDirectory(*a)
+        @stat.directory?
+      end
+
+      def dev
+        @stat.dev
+      end
+
+      def ino
+        @stat.ino
       end
     end
 

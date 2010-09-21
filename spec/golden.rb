@@ -15,6 +15,7 @@
     "fs-read-file-sync",
     "fs-read",
     "fs-readfile-empty",
+    "fs-realpath",
     "script-context",
     "script-new",
     "script-static-context",
