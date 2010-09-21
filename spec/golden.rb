@@ -14,6 +14,7 @@
     "fs-read-buffer",
     "fs-read-file-sync",
     "fs-read",
+    "fs-readfile-empty",
     "script-context",
     "script-new",
     "script-static-context",
