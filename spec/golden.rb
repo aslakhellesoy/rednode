@@ -13,6 +13,7 @@
     "fs-fsync",
     "fs-read-buffer",
     "fs-read-file-sync",
+    "fs-read",
     "script-context",
     "script-new",
     "script-static-context",
