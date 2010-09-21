@@ -18,6 +18,7 @@
     "fs-realpath",
     "fs-stat",
     "fs-symlink",
+    "fs-write-buffer",
     "script-context",
     "script-new",
     "script-static-context",

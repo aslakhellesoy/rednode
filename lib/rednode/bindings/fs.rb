@@ -43,10 +43,12 @@ module Rednode::Bindings
     end
 
     def write(fd, buffer, offset, length, position, callback = nil)
-      file(fd) do |f|
-        f.seek(position) if position
-        data = buffer.send(:data)
-        file.write(data[offset, length])
+      async(callback) do
+        file(fd) do |f|
+          f.seek(position) if position
+          data = buffer.send(:data)
+          file.write(data[offset, length])
+        end
       end
     end
 
