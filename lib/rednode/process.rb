@@ -16,8 +16,8 @@ module Rednode
     def binding(id)
       if @bindings[id]
         @bindings[id]
-      elsif Rednode::Bindings::const_defined?(id.capitalize)
-        @bindings[id] = Rednode::Bindings::const_get(id.capitalize).new
+      elsif Rednode::Bindings::const_defined?(pascalize(id))
+        @bindings[id] = Rednode::Bindings::const_get(pascalize(id)).new
       elsif id == "natives"
         exports = @engine['Object'].new
         for native in Dir["#{NODE_HOME}/lib/*.js"]
@@ -69,5 +69,12 @@ module Rednode
     end
 
     EventEmitter = self.superclass
+    
+  private
+
+    def pascalize(str)
+      str.gsub(/(_|^)(\w)/) {$2.upcase}
+    end    
+    
   end
 end
