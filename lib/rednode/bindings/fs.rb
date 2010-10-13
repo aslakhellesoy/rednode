@@ -46,7 +46,7 @@ module Rednode::Bindings
       file(fd) do |f|
         f.seek(position) if position
         data = buffer.send(:data)
-        file.write(data[offset, length])
+        f.write(data[offset, length])
       end
     end
 
