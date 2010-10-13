@@ -97,6 +97,12 @@ module Rednode::Bindings
       def mode
         @stat.mode
       end
+
+      def isDirectory
+        lambda do
+          @stat.directory?
+        end
+      end
     end
 
     private
