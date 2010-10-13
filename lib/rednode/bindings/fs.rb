@@ -3,6 +3,11 @@ module Rednode::Bindings
     include Namespace
     def initialize
       @descriptors = {}
+      @descriptors[STDOUT] = Class.new do
+        def self.write(chars)
+          $stdout.write(chars.pack("U*"))
+        end
+      end
     end
 
     def chmod(path, mode, callback = nil)
@@ -43,10 +48,13 @@ module Rednode::Bindings
     end
 
     def write(fd, buffer, offset, length, position, callback = nil)
-      file(fd) do |f|
-        f.seek(position) if position
-        data = buffer.send(:data)
-        f.write(data[offset, length])
+      async(callback) do
+        file(fd) do |f|
+          f.seek(position) if position
+          data = buffer.send(:data)
+          f.write(data[offset, length])
+        end
+        length
       end
     end
 

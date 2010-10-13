@@ -10,5 +10,10 @@ module Rednode::Bindings
         $stderr.write(msg)
       end
     end
+    
+    def stdoutFD
+      STDOUT
+    end
+    
   end
 end
