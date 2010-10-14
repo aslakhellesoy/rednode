@@ -18,6 +18,7 @@
     "fs-stat",
     "fs-symlink",
     "mkdir-rmdir",
+    "path",
     "readdir",
     "script-context",
     "script-new",
@@ -25,6 +26,7 @@
     "script-static-new",
     "script-static-this",
     "script-this",
+    "sys",
     "utf8-scripts"
   ],
   "pummel" => [
