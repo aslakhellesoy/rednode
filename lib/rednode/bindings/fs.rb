@@ -127,6 +127,11 @@ module Rednode::Bindings
       end
     end
     
+    def readdir(path, callback = nil)
+      async(callback) do
+        Dir.entries(path).reject { |e| ['.', '..'].include?(e) }
+      end
+    end
     
     class Stats
       def initialize(stat)

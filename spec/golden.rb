@@ -18,6 +18,7 @@
     "fs-stat",
     "fs-symlink",
     "mkdir-rmdir",
+    "readdir",
     "script-context",
     "script-new",
     "script-static-context",
