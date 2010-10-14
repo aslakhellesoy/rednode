@@ -25,10 +25,12 @@ module Rednode::Bindings
       end
     end
 
-    def close(fd)
-      file(fd) do |f|
-        f.close()
-        @descriptors.delete(fd)
+    def close(fd, callback = nil)
+      async(callback) do
+        file(fd) do |f|
+          f.close()
+          @descriptors.delete(fd)
+        end
       end
     end
 
