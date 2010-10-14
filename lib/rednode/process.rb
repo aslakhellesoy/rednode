@@ -59,6 +59,10 @@ module Rednode
     def loop(*args)
     end
 
+    def dlopen(filename, exports)
+      raise "Rednode currently can't read native (.node) modules. Failed to load: #{filename}"
+    end
+
     class Env
       def [](property)
         ENV.has_key?(property) ? ENV[property] : yield
