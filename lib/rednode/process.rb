@@ -63,12 +63,8 @@ module Rednode
       raise "Rednode currently can't read native (.node) modules. Failed to load: #{filename}"
     end
 
-    def umask(*args)
-      if args.size == 1
-        File.umask(args[0])
-      else
-        File.umask
-      end
+    def umask(mask = nil)
+      mask ? File.umask(mask) : File.umask
     end
 
     class Env
