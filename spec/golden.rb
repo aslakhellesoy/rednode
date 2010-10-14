@@ -17,6 +17,7 @@
     "fs-realpath",
     "fs-stat",
     "fs-symlink",
+    "mkdir-rmdir",
     "script-context",
     "script-new",
     "script-static-context",

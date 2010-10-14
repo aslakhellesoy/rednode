@@ -115,6 +115,19 @@ module Rednode::Bindings
       end
     end
     
+    def mkdir(path, mode, callback = nil)
+      async(callback) do
+        Dir.mkdir(path, mode)
+      end
+    end
+    
+    def rmdir(path, callback = nil)
+      async(callback) do
+        Dir.rmdir(path)
+      end
+    end
+    
+    
     class Stats
       def initialize(stat)
         @stat = stat
