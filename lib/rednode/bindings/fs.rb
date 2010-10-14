@@ -88,7 +88,31 @@ module Rednode::Bindings
 
     #TODO: figure out how to call fdatasync from ruby
     alias_method :fdatasync, :fsync
-
+    
+    def link(srcpath, dstpath, callback = nil)
+      async(callback) do
+        File.link(srcpath, dstpath)
+      end
+    end
+    
+    def symlink(linkdata, path, callback = nil)
+      async(callback) do
+        File.symlink(linkdata, path)
+      end
+    end
+    
+    def readlink(path, callback = nil)
+      async(callback) do
+        File.readlink(path)
+      end
+    end
+    
+    def unlink(path, callback = nil)
+      async(callback) do
+        File.unlink(path)
+      end
+    end
+    
     class Stats
       def initialize(stat)
         @stat = stat
@@ -111,6 +135,21 @@ module Rednode::Bindings
           @stat.directory?
         end
       end
+      
+      def isSymbolicLink
+        lambda do
+          @stat.symlink?
+        end
+      end
+      
+      def dev
+        @stat.dev
+      end
+      
+      def ino
+        @stat.ino
+      end
+      
     end
 
     private
