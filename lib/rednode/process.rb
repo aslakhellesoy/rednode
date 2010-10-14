@@ -63,6 +63,14 @@ module Rednode
       raise "Rednode currently can't read native (.node) modules. Failed to load: #{filename}"
     end
 
+    def umask(*args)
+      if args.size == 1
+        File.umask(args[0])
+      else
+        File.umask
+      end
+    end
+
     class Env
       def [](property)
         ENV.has_key?(property) ? ENV[property] : yield

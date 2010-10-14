@@ -27,6 +27,7 @@
     "script-static-this",
     "script-this",
     "sys",
+    "umask",
     "utf8-scripts"
   ],
   "pummel" => [
