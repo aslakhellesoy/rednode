@@ -53,8 +53,8 @@ module Rednode::Bindings
         thisContext = V8::Context.allocate
         thisContext.instance_eval do
           @native = V8::C::Context::GetEntered()
-          portal = V8::Portal.new(thisContext, V8::Access.new)
-          @scope = portal.rb(@native.Global())
+          @to = V8::Portal.new(thisContext, V8::Access.new)
+          @scope = @to.rb(@native.Global())
         end
         thisContext.eval(@source, filename || "<script>")
       end
