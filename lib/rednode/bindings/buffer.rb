@@ -126,7 +126,7 @@ module Rednode::Bindings
       end
       
       def to_s
-        @data.pack("U*")
+        @data.pack("C*")
       end
       
     end

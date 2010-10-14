@@ -5,7 +5,7 @@ module Rednode::Bindings
       @descriptors = {}
       @descriptors[STDOUT] = Class.new do
         def self.write(chars)
-          $stdout.write(chars.pack("U*"))
+          $stdout.write(chars.pack("C*"))
         end
       end
     end
