@@ -42,11 +42,11 @@ module Rednode::Bindings
         end
       end
 
-      def self.runInThisContext(source, sandbox = nil, filename = nil)
-        new(source).runInThisContext(sandbox, filename)
+      def self.runInThisContext(source, filename = nil)
+        new(source).runInThisContext(filename)
       end
 
-      def runInThisContext(sandbox = nil, filename = nil)
+      def runInThisContext(filename = nil)
         #mini-hack: there isn't a way to get the current V8::Context
         #as a high level context in therubyracer, so we hack the constructor
         #we wished existed that binds to the underlying current C::Context
