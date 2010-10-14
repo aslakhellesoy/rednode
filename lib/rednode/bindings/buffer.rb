@@ -124,6 +124,11 @@ module Rednode::Bindings
           end
         end
       end
+      
+      def to_s
+        @data.pack("U*")
+      end
+      
     end
   end
 end
