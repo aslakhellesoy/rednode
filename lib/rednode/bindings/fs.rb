@@ -130,57 +130,15 @@ module Rednode::Bindings
       end
     end
 
-    def readdir(name, callback = nil)
-      async(callback) do
-        Dir.new(name).to_a
-      end
-    end
-
-    #TODO: figure out how to call fdatasync from ruby
-    alias_method :fdatasync, :fsync
-    
-    def link(srcpath, dstpath, callback = nil)
-      async(callback) do
-        File.link(srcpath, dstpath)
-      end
-    end
-    
-    def symlink(linkdata, path, callback = nil)
-      async(callback) do
-        File.symlink(linkdata, path)
-      end
-    end
-    
-    def readlink(path, callback = nil)
-      async(callback) do
-        File.readlink(path)
-      end
-    end
-    
-    def unlink(path, callback = nil)
-      async(callback) do
-        File.unlink(path)
-      end
-    end
-    
-    def mkdir(path, mode, callback = nil)
-      async(callback) do
-        Dir.mkdir(path, mode)
-      end
-    end
-    
-    def rmdir(path, callback = nil)
-      async(callback) do
-        Dir.rmdir(path)
-      end
-    end
-    
     def readdir(path, callback = nil)
       async(callback) do
         Dir.entries(path).reject { |e| ['.', '..'].include?(e) }
       end
     end
-    
+
+    #TODO: figure out how to call fdatasync from ruby
+    alias_method :fdatasync, :fsync
+
     class Stats
       def initialize(stat)
         @stat = stat
