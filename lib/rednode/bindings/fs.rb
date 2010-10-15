@@ -3,6 +3,11 @@ module Rednode::Bindings
     include Namespace
     def initialize
       @descriptors = {}
+      @descriptors[STDOUT] = Class.new do
+        def self.write(chars)
+          $stdout.write(chars.pack("C*"))
+        end
+      end
     end
 
     def chmod(path, mode, callback = nil)
@@ -20,10 +25,12 @@ module Rednode::Bindings
       end
     end
 
-    def close(fd)
-      file(fd) do |f|
-        f.close()
-        @descriptors.delete(fd)
+    def close(fd, callback = nil)
+      async(callback) do
+        file(fd) do |f|
+          f.close()
+          @descriptors.delete(fd)
+        end
       end
     end
 
@@ -47,8 +54,9 @@ module Rednode::Bindings
         file(fd) do |f|
           f.seek(position) if position
           data = buffer.send(:data)
-          file.write(data[offset, length])
+          f.write(data[offset, length])
         end
+        length
       end
     end
 
@@ -130,7 +138,49 @@ module Rednode::Bindings
 
     #TODO: figure out how to call fdatasync from ruby
     alias_method :fdatasync, :fsync
-
+    
+    def link(srcpath, dstpath, callback = nil)
+      async(callback) do
+        File.link(srcpath, dstpath)
+      end
+    end
+    
+    def symlink(linkdata, path, callback = nil)
+      async(callback) do
+        File.symlink(linkdata, path)
+      end
+    end
+    
+    def readlink(path, callback = nil)
+      async(callback) do
+        File.readlink(path)
+      end
+    end
+    
+    def unlink(path, callback = nil)
+      async(callback) do
+        File.unlink(path)
+      end
+    end
+    
+    def mkdir(path, mode, callback = nil)
+      async(callback) do
+        Dir.mkdir(path, mode)
+      end
+    end
+    
+    def rmdir(path, callback = nil)
+      async(callback) do
+        Dir.rmdir(path)
+      end
+    end
+    
+    def readdir(path, callback = nil)
+      async(callback) do
+        Dir.entries(path).reject { |e| ['.', '..'].include?(e) }
+      end
+    end
+    
     class Stats
       def initialize(stat)
         @stat = stat
