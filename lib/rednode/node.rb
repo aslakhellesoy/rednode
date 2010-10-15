@@ -1,4 +1,3 @@
-require 'v8'
 
 module Rednode
   class Node
@@ -11,8 +10,9 @@ module Rednode
       @main = main
     end
 
-    def start
-      @node.call(Process.new(self))
+    def start(process = Process.new(self))
+      @node.call(process)
     end
+
   end
 end

@@ -1,5 +1,7 @@
-
 require 'rubygems'
+require 'eventmachine'
+require 'v8'
+
 module Rednode
   VERSION = '0.0.1'
   NODE_VERSION = '0.1.104'
@@ -8,6 +10,8 @@ module Rednode
   require 'rednode/namespace'
   require 'rednode/constants'
   require 'rednode/events'
+  require 'rednode/timer'
   require 'rednode/process'
   require 'rednode/bindings'
+
 end

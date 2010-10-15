@@ -3,7 +3,7 @@ module Rednode
   class Process < EventEmitter
     include Constants
     include Namespace
-    attr_reader :global, :env
+    attr_reader :global, :env, :scheduler
 
     def initialize(node)
       @node = node
@@ -11,6 +11,7 @@ module Rednode
       @global = @engine.scope
       @bindings = {}
       @env = Env.new
+      @scheduler = Rednode::Scheduler.new
     end
 
     def binding(id)
@@ -57,6 +58,7 @@ module Rednode
     end
 
     def loop(*args)
+      @scheduler.start_loop
     end
 
     def dlopen(filename, exports)
@@ -67,15 +69,43 @@ module Rednode
       mask ? File.umask(mask) : File.umask
     end
 
+    def _needTickCallback(*args)
+      @scheduler.next_tick do
+        @node.engine.eval("process._tickCallback()")
+      end
+    end
+
     class Env
       def [](property)
         ENV.has_key?(property) ? ENV[property] : yield
       end
     end
-
+    
     class Timer
+      attr_accessor :callback
+      
+      def initialize(process)
+        @process = process
+        @timer = nil
+      end
+      
+      def start(start, interval)
+        if interval == 0
+          @timer = @process.scheduler.add_timer(start) { callback.call }
+        else
+          @timer = @process.scheduler.add_periodic_timer(start) { callback.call }
+        end
+      end
+      
+      def cancel
+        @process.scheduler.cancel_timer(@timer)
+      end
+    end    
+    
+    def Timer
+      @timer ||= lambda { Process::Timer.new(self) }
     end
-
+    
     EventEmitter = self.superclass
     
   private

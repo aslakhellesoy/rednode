@@ -18,6 +18,8 @@
     "fs-stat",
     "fs-symlink",
     "mkdir-rmdir",
+    "next-tick",
+    "next-tick-ordering",
     "path",
     "readdir",
     "script-context",
