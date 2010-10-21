@@ -1,0 +1,6 @@
+2010.10.21 - Version 0.1.0
+  * initial release
+  * node.js version 0.2.0
+  * async file system access
+  * integration with event machine
+  * small subset of node.js tests passing.
