@@ -1,4 +1,6 @@
 require 'rubygems'
+require 'bundler/setup'
+
 $:.unshift('./lib')
 require 'rednode'
 
@@ -11,6 +13,7 @@ $gem = Gem::Specification.new do |gem|
   gem.homepage = "http://github.com/cowboyd/rednode"
   gem.authors = ["Charles Lowell", "Aslak Hellesøy"]
   gem.add_dependency "therubyracer", "~> 0.8.0.pre"
+  gem.add_dependency "eventmachine"
   gem.add_development_dependency "rspec", "~> 2.0.0"
 end
 
