@@ -29,4 +29,10 @@ describe "Rednode" do
       warn("we're expecting to pass tests in #{package} that don't exist: #{undefined.join(', ')}")
     end
   end
+
+  after(:all) do
+    Dir.chdir(Rednode::NODE_HOME) do
+      `git clean -f`
+    end
+  end
 end
