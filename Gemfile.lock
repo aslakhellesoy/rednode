@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    rednode (0.1.0)
+    rednode (0.1.2)
       eventmachine
-      therubyracer (~> 0.8.0.pre)
+      therubyracer (>= 0.8.0)
 
 GEM
   remote: http://rubygems.org/
@@ -20,7 +20,7 @@ GEM
     rspec-mocks (2.0.1)
       rspec-core (~> 2.0.1)
       rspec-expectations (~> 2.0.1)
-    therubyracer (0.8.0.pre2)
+    therubyracer (0.8.0)
 
 PLATFORMS
   ruby
@@ -28,5 +28,5 @@ PLATFORMS
 DEPENDENCIES
   eventmachine
   rednode!
-  rspec (~> 2.0.0)
-  therubyracer (~> 0.8.0.pre)
+  rspec (>= 2.0.0)
+  therubyracer (>= 0.8.0)

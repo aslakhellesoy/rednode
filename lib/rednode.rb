@@ -3,7 +3,7 @@ require 'eventmachine'
 require 'v8'
 
 module Rednode
-  VERSION = '0.1.1'
+  require 'rednode/version'
   NODE_VERSION = '0.2.0'
   NODE_HOME = File.expand_path(File.dirname(__FILE__) + '/../ext/node')
   require 'rednode/node'
