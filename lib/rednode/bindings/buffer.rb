@@ -19,7 +19,7 @@ module Rednode::Bindings
           when 'base64'
             (opt + "=" * (4 - opt.length % 4)).unpack('m').first.unpack('C*')
           else
-            raise "Unknown encoding"
+            raise "Unknown encoding '#{encoding}'"
           end
         when self.class
           start, stop = *args
