@@ -12,7 +12,7 @@ module Rednode::Bindings
         when V8::Array
           @data = opt.to_a
         when String
-          encoding = *args
+          encoding = args.first
           @data = case encoding
           when 'ascii'                        then opt.unpack('U*')
           when 'utf8','utf-8','binary',nil    then opt.unpack('C*')
@@ -22,7 +22,7 @@ module Rednode::Bindings
             raise "Unknown encoding '#{encoding}'"
           end
         when self.class
-          start, stop = *args
+          start, stop = args[0],args[1]
           @data = opt.send(:data)[start..stop-1]
         else
           raise "Bad argument"
