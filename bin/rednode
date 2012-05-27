@@ -2,4 +2,4 @@
 $:.unshift(File.dirname(__FILE__) + '/../lib') unless $:.include?(File.dirname(__FILE__) + '/../lib')
 
 require 'rednode'
-Rednode::Context.new.run(ARGV[0])
+Rednode::Node.new(ARGV[0]).start

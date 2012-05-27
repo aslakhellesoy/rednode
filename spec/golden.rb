@@ -1,0 +1,42 @@
+
+{
+  "simple" => [
+    "assert",
+    "buffer",
+    "byte-length",
+    "chdir",
+    "delayed-require",
+    "eval-cx",
+    "event-emitter-add-listeners",
+    "event-emitter-remove-listeners",
+    "file-read-noexist",
+    "fs-chmod",
+    "fs-error-messages",
+    "fs-stat",
+    "fs-fsync",
+    "fs-read-buffer",
+    "fs-read-file-sync",
+    "fs-read",
+    "fs-readfile-empty",
+    "fs-realpath",
+    "fs-stat",
+    "fs-symlink",
+    "fs-write-buffer",
+    "mkdir-rmdir",
+    "next-tick",
+    "next-tick-ordering",
+    "path",
+    "readdir",
+    "script-context",
+    "script-new",
+    "script-static-context",
+    "script-static-new",
+    "script-static-this",
+    "script-this",
+    "sys",
+    "umask",
+    "utf8-scripts"
+  ],
+  "pummel" => [
+  ]
+}
